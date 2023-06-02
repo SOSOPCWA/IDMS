@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>資產管理</title>
+    <style type="text/css">
+        .style1
+        {
+            font-size: x-large;
+            text-align: center;
+        }
+        .style2
+        {
+            width: 100%;
+            border: 1px solid #000000;
+        }
+        .style3
+        {
+            font-weight: bold;
+            text-align: center;
+        }
+        .style4
+        {
+            font-size: small;
+        }
+    </style>
+</head>
+<body>
+
+    <p class="style1">
+        <strong>資產管理簡介</strong></p>
+    <p>
+        【前言】：資產管理系統目前指 (1)財產管理系統(Pms) (2)資源管理系統(IDMS) (3)資訊安全管理工具(ISMS)<br />
+    </p>
+    <p>
+        【ISMS】： 
+        <br />
+        1. 定義資產清冊，分七大類 
+        <br />
+        2. 以機密性、完整性、可用性、適法性評估資產價值 
+        <br />
+        3. 依威脅弱點作風險評鑑 
+         
+        <br />
+        4. 依ISO條文提風險改善<br />
+        5. 發行四階[文件]指引如何營運持續管理<br />
+    </p>
+    <p>
+        【IDMS】： 
+        <br />
+        1. [硬體]：系統設備、週邊設備、零附件 
+        <br />
+        2. [軟體]：資訊系統、套裝軟體 
+        <br />
+        3. [通訊]：網路設備、接網迴路 
+        <br />
+        4. [環境]：環境設備、接電迴路、放置地點 
+        <br />
+        5. [人員]：組織架構、維護群組<br />
+        6. [資料]：請參考各資訊系統，專案會議馮副指示不納入IDMS<br />
+    </p>
+    <p>
+        【流程】：<br />
+        購入[財產]編號登帳&nbsp; ，移入機房[設備]上架，[接電]、[接網]形成迴路，[主機]安裝[軟體]OS 
+        <br />
+        [系統]整合發揮[功能]，創造價值列為[資產]，[風險評估]..[威脅弱點] ，發行[文件]營運持續<br />
+        <br />
+    </p>
+    <p>
+        【比較】：<br />
+        <table border="1" cellpadding="0" cellspacing="0" class="style2">
+            <tr>
+                <td class="style3">
+                    資產管理</td>
+                <td class="style3">
+                    IDMS</td>
+                <td class="style3">
+                    ISMS</td>
+                <td class="style3">
+                    Pms</td>
+            </tr>
+            <tr>
+                <td class="style3">
+                    維護人員</td>
+                <td class="style4">
+                    <span class="style4">程式：SSM小組<br />
+                    系統：SSM小組</span><br class="style4" />
+                    <span class="style4">資料：維護人員</span></td>
+                <td>
+                    <span class="style4">程式：SSM小組</span><br class="style4" />
+                    <span class="style4">系統：資訊中心文件管理員</span><br class="style4" />
+                    <span class="style4">資料：各中心文件管理員</span></td>
+                <td>
+                    <span class="style4">系統：應用軟體課</span><br class="style4" />
+                    <span class="style4">資料(系統)：系統控制課</span><br class="style4" />
+                    <span class="style4">資料(其它)：技術支援課</span></td>
+            </tr>
+            <tr>
+                <td class="style3">
+                    作業平台</td>
+                <td>
+                    <span class="style4">Windows 2008 R2 Server</span><br class="style4" />
+                    <span class="style4">SQL Server 2008 R2</span><br class="style4" />
+                    <span class="style4">ASP.NET 4.0</span></td>
+                <td>
+                    <span class="style4">Windows 2008 R2 Server</span><br class="style4" />
+                    <span class="style4">SQL Server 2008</span><br class="style4" />
+                    <span class="style4">ASP.NET 2.0 Compilerd (NII)</span></td>
+                <td>
+                    <span class="style4">Windows 2008 Server</span><br class="style4" />
+                    <span class="style4">Oracle</span></td>
+            </tr>
+            <tr>
+                <td class="style3">
+                    伺服器</td>
+                <td class="style4">
+                    sos-vm16(10.6.1.4)</td>
+                <td class="style4">
+                    ismrasvr1(163.29.179.144)</td>
+                <td class="style4">
+                    pmssvr1</td>
+            </tr>
+            <tr>
+                <td class="style3">
+                    網站數量</td>
+                <td class="style4">
+                    SOS(80)、MIC(8888)、Test(12345)</td>
+                <td class="style4">
+                    每中心一個，約10個</td>
+                <td class="style4">
+                    1</td>
+            </tr>
+            <tr>
+                <td class="style3">
+                    權限種類</td>
+                <td class="style4">
+                    SSM、SOS、Maintainer(MIC)、User(MIC)</td>
+                <td class="style4">
+                    Admin、Editor、User</td>
+                <td class="style4">
+                    略</td>
+            </tr>
+            <tr>
+                <td class="style3">
+                    系統特質</td>
+                <td class="style4">
+                    適用範圍小(中心)<br />
+                    使用頻率高，分散使用<br />
+                    配合負責人需求及時修改</td>
+                <td class="style4">
+                    適用範圍大(全局)<br />
+                    使用頻率低，同時使用<br />
+                    多研究而少動手</td>
+                <td class="style4">
+                    適用範圍大(全局)</td>
+            </tr>
+            <tr>
+                <td class="style3">
+                    管理重心</td>
+                <td class="style4">
+                    資源管理</td>
+                <td class="style4">
+                    資安管理</td>
+                <td class="style4">
+                    財產管理</td>
+            </tr>
+        </table>
+    </p>
+    <p>
+        &nbsp;</p>
+
+</body>
+</html>

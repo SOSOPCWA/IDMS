@@ -1,0 +1,3 @@
+SELECT * FROM [IDMS].[dbo].[定位設定] as aaa,[IDMS].[dbo].[定位設定] as bbb
+where aaa.定位方式='機櫃' and bbb.定位方式='機櫃' and aaa.坐標x between bbb.坐標x1 and bbb.坐標x2 and aaa.坐標y between bbb.坐標y1 and bbb.坐標y2
+and aaa.定位編號<>bbb.定位編號

@@ -1,0 +1,382 @@
+﻿<%-- <%@ Page Title="通用查詢" Language="C#" MasterPageFile="~/IDMS/MasterPage.master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeFile="Search.aspx.cs" Inherits="Search_Search" %> --%>
+<%@ Page Title="通用查詢" Language="C#" MasterPageFile="~/IDMS/MasterPage.master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeFile="Search.aspx.cs" Inherits="Search_Search" EnableEventValidation="false"%>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">        
+        .style4
+        {
+            font-size: x-small;
+            color: Blue;
+            cursor: pointer;
+        }
+        
+        .style5
+        {
+            font-size: x-small;
+            text-align: center;
+            color: Green;
+        }
+        .style6
+        {
+            width: 100%;
+            border-style: solid;
+            border-width: 1px;
+        }
+        .style7
+        {
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <table cellpadding="0" cellspacing="0" class="style6" border="1">
+        <tr>
+            <td class="style7">實體設備</td>
+            <td class="style7">設備迴路</td>
+            <td class="style7">秘總財產</td>
+            <td class="style7">維護人員</td>
+            <td colspan="2" class="style7">作業主機</td>            
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                <asp:CheckBox ID="ChkType" runat="server" Font-Size="Small" Text="型態" />
+                <asp:DropDownList ID="SelType" runat="server" ForeColor="#009933" Visible="true"
+                    AutoPostBack="True" DataSourceID="SqlDataSource8" DataTextField="Item" DataValueField="Item">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="select Item from Config where Kind=@Kind order by mark">
+                    <SelectParameters>
+                        <asp:Parameter DefaultValue="設備型態" Name="Kind" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:CheckBox ID="ChkDevStatus" runat="server" Font-Size="Small" Text="狀態" />
+                <asp:DropDownList ID="SelDevStatus" runat="server" ForeColor="#009933" DataSourceID="SqlDataSourceDevStatus"
+                    DataTextField="Item" DataValueField="Item">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSourceDevStatus" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="SELECT [Item] FROM [Config] WHERE [Kind] = '設備狀態' ORDER BY [mark]">
+                </asp:SqlDataSource>
+                <br />
+                <asp:CheckBox ID="ChkKind" runat="server" Font-Size="Small" Text="種類" />
+                <asp:DropDownList ID="SelKind" runat="server" ForeColor="#009933" Visible="true"
+                    DataSourceID="SqlDataSource2" DataTextField="Item" DataValueField="Item">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="select Item from Config where Kind=@Kind order by mark">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="SelType" Name="Kind" PropertyName="SelectedValue" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+                <asp:CheckBox ID="ChkHostType" runat="server" Font-Size="Small" Text="主機" />
+                <asp:DropDownList ID="SelHostType" runat="server" ForeColor="#009933" Visible="true">
+                    <asp:ListItem Value="主機設備"  > 主機設備 </asp:ListItem>
+                    <asp:ListItem Value="迴路設備"  > 迴路設備 </asp:ListItem>
+                    <asp:ListItem Value="作業主機"  > 作業主機 </asp:ListItem>
+                    <asp:ListItem Value="空機"      >   空機   </asp:ListItem>
+                    <asp:ListItem Value="系統主機"  > 系統主機 </asp:ListItem>
+                    <asp:ListItem Value="網路主機"  > 網路主機 </asp:ListItem>
+                    <asp:ListItem Value="中心設備"  > 中心設備 </asp:ListItem>
+                    <asp:ListItem Value="代管設備"  > 代管設備 </asp:ListItem>
+                    <asp:ListItem Value="中心主機"  > 中心主機 </asp:ListItem>
+                    <asp:ListItem Value="代管主機"  > 代管主機 </asp:ListItem>
+                    <asp:ListItem Value="個人主機"  > 個人主機 </asp:ListItem>
+                    <asp:ListItem Value="伺服主機"  > 伺服主機 </asp:ListItem>
+                    <asp:ListItem Value="實體主機"  > 實體主機 </asp:ListItem>
+                    <asp:ListItem Value="虛擬主機"  > 虛擬主機 </asp:ListItem>                    
+                    <asp:ListItem Value="功能主機"  > 功能主機 </asp:ListItem>
+                    <asp:ListItem Value="非功能主機">非功能主機</asp:ListItem>
+                    <asp:ListItem Value="單一主機"  > 單一主機 </asp:ListItem>
+                    <asp:ListItem Value="多重主機"  > 多重主機 </asp:ListItem>                 
+                </asp:DropDownList>
+                <asp:LinkButton ID="LinkHostType" runat="server" CssClass="style4" onclick="LinkHostType_Click">說明</asp:LinkButton>
+                <br />
+
+                <asp:CheckBox ID="ChkPlace" runat="server" Font-Size="Small" Text="地點" />
+                <asp:DropDownList ID="SelPlace" runat="server" DataSourceID="SqlDataSourcePlace" DataTextField="區域名稱"
+                    ForeColor="#009933" DataValueField="區域名稱" AutoPostBack="True">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSourcePlace" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="SELECT DISTINCT [區域名稱] FROM [定位設定] WHERE ([定位方式] &lt;&gt; @定位方式) ORDER BY [區域名稱]">
+                    <SelectParameters>
+                        <asp:Parameter DefaultValue="坐標" Name="定位方式" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+
+                <asp:CheckBox ID="ChkPointer" runat="server" />
+                <asp:DropDownList ID="SelPointer" runat="server" DataSourceID="SqlDataSourcePointer" DataTextField="定位名稱"
+                    ForeColor="#009933" DataValueField="定位編號">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSourcePointer" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="SELECT [定位名稱], [定位編號] FROM [定位設定] WHERE (([定位方式] &lt;&gt; @定位方式) AND ([區域名稱] = @區域名稱)) ORDER BY [定位名稱]">
+                    <SelectParameters>
+                        <asp:Parameter DefaultValue="坐標" Name="定位方式" Type="String" />
+                        <asp:ControlParameter ControlID="SelPlace" Name="區域名稱" PropertyName="SelectedValue" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+                <asp:CheckBox ID="ChkControl" runat="server" Font-Size="Small" Text="機房" ToolTip="機房門禁管制區" />
+            </td>
+
+            <td rowspan="2">
+                <asp:CheckBox ID="ChkNode" runat="server" Text="節點" Font-Size="Small" Enabled="false" />
+                <asp:DropDownList ID="SelNode" runat="server" ForeColor="#009933" DataSourceID="SqlDataSourceNode" DataTextField="設備名稱" DataValueField="設備編號">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSourceNode" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>" SelectCommand="">
+                </asp:SqlDataSource>
+                <asp:LinkButton ID="LinkUPS" runat="server" CssClass="style4" onclick="LinkUPS_Click" ToolTip="列出UPS電源，以便查詢下游接電、接網迴路">UPS</asp:LinkButton>&nbsp;
+                <asp:LinkButton ID="LinkPointer" runat="server" CssClass="style4" onclick="LinkPointer_Click" ToolTip="依放置地點列出設備清單，以便查詢下游接電、接網迴路">地點</asp:LinkButton><br />
+
+                <asp:CheckBox ID="ChkPower" runat="server" Text="接電" Font-Size="Small" />
+                <asp:DropDownList ID="SelPower" runat="server" ForeColor="#009933" Visible="true">
+                    <asp:ListItem Value="x">未接迴路</asp:ListItem>
+                    <asp:ListItem Value="v">有接迴路</asp:ListItem>
+                    <asp:ListItem Value="a">接單電源</asp:ListItem>
+                    <asp:ListItem Value="1">接單迴路</asp:ListItem>
+                    <asp:ListItem Value="b">接雙電源</asp:ListItem>
+                    <asp:ListItem Value="2">接雙迴路</asp:ListItem>
+                    <asp:ListItem Value="c">接多電源</asp:ListItem>
+                    <asp:ListItem Value="*">接多迴路</asp:ListItem>
+                    <asp:ListItem Value="?">單電數迴</asp:ListItem>
+                </asp:DropDownList>
+                <span class="style4" onclick="alert('請先點選UPS連結，以便列出您要查詢的電力節點清單。\n\n單迴路指只接一條電源迴路，單電源指只接一台UPS，後者可能是雙迴路，但都接到同一台UPS\n\n查詢未接迴路建議亦核取實體設備中(1)機房(2)已上線(3)主機設備\n\n查詢有接迴路請先選取電源節點，例如(總電源)');"><u>說明</u></span><br />
+                
+                <asp:CheckBox ID="ChkNet" runat="server" Text="接網" Font-Size="Small" />
+                <asp:DropDownList ID="SelNet" runat="server" ForeColor="#009933" Visible="true">
+                    <asp:ListItem Value="x">未接迴路</asp:ListItem>
+                    <asp:ListItem Value="v">有接迴路</asp:ListItem>
+                    <asp:ListItem Value="1">接單迴路</asp:ListItem>
+                    <asp:ListItem Value="2">接雙迴路</asp:ListItem>
+                    <asp:ListItem Value="*">接多迴路</asp:ListItem>
+                </asp:DropDownList>
+                <span class="style4" onclick="alert('請先點選地點連結，以便列出您要查詢的網路節點清單。\n\n查詢未接迴路建議亦核取實體設備中(1)機房(2)已上線(3)主機設備\n\n查詢有接迴路請先選取網路節點，例如(總網源)');"><u>說明</u></span>                
+            </td>
+
+            <td>
+                <asp:CheckBox ID="ChkProp" runat="server" Font-Size="Small" Text="秘總財編" />
+                <asp:DropDownList ID="SelProp" runat="server" ForeColor="#009933">
+                    <asp:ListItem Value="有對應">有對應</asp:ListItem>
+                    <asp:ListItem Value="不對應">不對應</asp:ListItem>
+                    <asp:ListItem Value="無財編">無財編</asp:ListItem>
+                </asp:DropDownList>
+                <br />
+                <asp:CheckBox ID="ChkOver" runat="server" Font-Size="Small" Text="已過年限" />
+            </td>
+
+            <td rowspan="3">
+                <asp:CheckBox ID="ChkManKind" Enabled="false" runat="server" Font-Size="Small" Text="對象" />
+                <asp:DropDownList ID="SelManKind" runat="server" ForeColor="#009933">
+                    <asp:ListItem Value="負責人員">負責人員</asp:ListItem> 
+                    <asp:ListItem Value="設備維護人員">設備維護</asp:ListItem>
+                    <asp:ListItem Value="作業維護人員">作業維護</asp:ListItem>
+                    <asp:ListItem Value="保管人員">保管人員</asp:ListItem>
+                    <asp:ListItem Value="設備保管人員">設備保管</asp:ListItem>
+                    <asp:ListItem Value="財產保管人員">財產保管</asp:ListItem>
+                    <asp:ListItem Value="使用人員">使用人員</asp:ListItem>                                       
+                    <asp:ListItem Value="設備建立人員">設備建立</asp:ListItem> 
+                    <asp:ListItem Value="設備修改人員">設備修改</asp:ListItem> 
+                    <asp:ListItem Value="作業建立人員">作業建立</asp:ListItem> 
+                    <asp:ListItem Value="作業修改人員">作業修改</asp:ListItem> 
+                </asp:DropDownList>
+                <span class="style4" onclick="alert('1.負責人員：保管人員(設備、財產)、維護人員(設備、作業)\n2.保管人員先取設備，空白再取財產\n3.保管、建立、修改人員之群組選項無作用\n4.非個人作業系統取作業維護人員當使用人員，個人作業系統或沒有系統作業主機則取保管人員當使用人員');">
+                    <u>說明</u></span>
+                <br />
+                <asp:CheckBox ID="ChkUnit" runat="server" Font-Size="Small" Text="課別" />
+                <asp:DropDownList ID="SelUnit" runat="server" ForeColor="#009933" Visible="true"
+                    AutoPostBack="True" DataSourceID="SqlDataSource11" DataTextField="成員" DataValueField="成員">
+                </asp:DropDownList>
+                <br />
+                <asp:CheckBox ID="ChkGroup" runat="server" Font-Size="Small" Text="群組" />
+                <asp:DropDownList ID="SelGroup" runat="server" ForeColor="#009933" Visible="true" DataSourceID="SqlDataSource16"
+                    DataTextField="成員" DataValueField="成員">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource16" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="Select [成員] from [View_組織架構] where [課別]=@課別 and [性質]='群組' order by [代號]">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="SelUnit" Name="課別" PropertyName="SelectedValue" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+                <br />
+                <asp:CheckBox ID="ChkMan" runat="server" Font-Size="Small" Text="員工" />
+                <asp:DropDownList ID="SelMan" runat="server" ForeColor="#009933" Visible="true" DataSourceID="SqlDataSource13"
+                    DataTextField="Item" DataValueField="Item">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource13" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="Select Item from Config where Kind=@課別 order by Mark">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="SelUnit" Name="課別" PropertyName="SelectedValue" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+            </td>
+
+            <td rowspan="2">                
+                <asp:CheckBox ID="ChkSysNo" runat="server" Font-Size="Small" Text="功能" />
+                <asp:DropDownList ID="SelSysNo" runat="server" ForeColor="#009933" DataSourceID="SqlDataSourceSysNo"
+                    DataTextField="資源名稱" DataValueField="資源編號">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSourceSysNo" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="(SELECT [資源名稱],[資源編號],[資源種類],[系統全名] FROM [View_系統資源] where [資源種類]='分類' and [所屬編號]=0)
+                        Union (SELECT '　' + [資源名稱] AS [資源名稱],[資源編號],[資源種類],[系統全名] FROM [View_系統資源] where [資源種類]='系統')
+                        Union (SELECT '　　' + [資源名稱] AS [資源名稱],[資源編號],[資源種類],[系統全名] FROM [View_系統資源] where [資源種類]='功能') order by [系統全名]"
+                >                    
+                </asp:SqlDataSource>
+                <br />
+                <asp:CheckBox ID="ChkOsKind" runat="server" Font-Size="Small" Text="平台" />
+                <asp:DropDownList ID="SelOsKind" runat="server" ForeColor="#009933" DataSourceID="SqlDataSourceOsKind"
+                    DataTextField="Config" DataValueField="Config" AutoPostBack="True">                    
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSourceOsKind" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="SELECT distinct [Config] FROM [Config] WHERE [Kind]='作業平台'">                    
+                </asp:SqlDataSource>&nbsp;&nbsp;
+                <br />
+                <asp:CheckBox ID="ChkOS" runat="server" Font-Size="Small" Text=" OS" />&nbsp;
+                <asp:DropDownList ID="SelOS" runat="server" ForeColor="#009933" Visible="true"
+                    DataSourceID="SqlDataSourceOS" DataTextField="Item" DataValueField="Item">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSourceOS" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="SELECT [Item] FROM [Config] where Kind='作業平台' and [Config]=@OsKind order by [Item]">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="SelOsKind" Name="OsKind" PropertyName="SelectedValue" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>                 
+            </td>
+
+            <td rowspan="2">
+                <asp:CheckBox ID="ChkSaveIO" runat="server" Font-Size="Small" Text="安管" />
+                <asp:DropDownList ID="SelSaveIO" runat="server" ForeColor="#009933">
+                    <asp:ListItem Value="I">安內</asp:ListItem>
+                    <asp:ListItem Value="O">安外</asp:ListItem>
+                    <asp:ListItem Value="E">外網</asp:ListItem>
+                    <asp:ListItem Value="X">非網</asp:ListItem>
+                </asp:DropDownList>
+                <br />
+                <asp:CheckBox ID="ChkOnCall" runat="server" Font-Size="Small" Text="緊急" />
+                <asp:DropDownList ID="SelOnCall" runat="server" ForeColor="#009933">
+                    <asp:ListItem Value="不用">不用</asp:ListItem>
+                    <asp:ListItem Value="上班">上班</asp:ListItem>
+                    <asp:ListItem Value="白天">白天</asp:ListItem>
+                    <asp:ListItem Value="立即">立即</asp:ListItem>
+                </asp:DropDownList>
+                <br />
+                <asp:CheckBox ID="ChkApStatus" runat="server" Font-Size="Small" Text="狀態" />
+                <asp:DropDownList ID="SelApStatus" runat="server" ForeColor="#009933" DataSourceID="SqlDataSourceApStatus"
+                        DataTextField="Item" DataValueField="Item">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSourceApStatus" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                        SelectCommand="SELECT [Item] FROM [Config] WHERE [Kind] = '作業狀態' ORDER BY [mark]">
+                </asp:SqlDataSource>
+            </td>            
+        </tr>
+
+        <tr>
+            <td>
+                <asp:CheckBox ID="ChkPowerOff" runat="server" Text="關機" ToolTip="關機順序" Font-Size="Small" />
+                <asp:DropDownList ID="SelPowerOff" runat="server" ForeColor="#009933" Visible="true" DataSourceID="SqlDataSourcePowerOff" DataTextField="Item" DataValueField="Item">                    
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSourcePowerOff" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="SELECT [Item] FROM [Config] WHERE [Kind] = '關機順序' ORDER BY [mark]">
+                </asp:SqlDataSource>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <asp:CheckBox ID="ChkAssets" runat="server" Font-Size="Small" Text="資產" />
+                <asp:DropDownList ID="SelAssets" runat="server" ForeColor="#009933" Visible="true"
+                    DataSourceID="SqlDataSourceAssets" DataTextField="資產名稱" DataValueField="資產編號">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSourceAssets" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="select [Item] as [資產編號],[Item]+ ' ' +[Config] as [資產名稱] from [Config] where ([Kind]='常用資產' or [Kind]='資產清冊') and [Item]in (select distinct [資產編號] from [View_設備管理] Union select distinct [資產編號] from [系統資源]) order by [Kind],[Item]">
+                </asp:SqlDataSource>
+            </td>             
+            <td colspan="2">
+                <asp:CheckBox ID="ChkDate" runat="server" Font-Size="Small" Text="日期欄位" />
+                <asp:DropDownList ID="SelDateKind" runat="server" ForeColor="#009933">
+                    <asp:ListItem Value=""> (全部) </asp:ListItem>
+                    <asp:ListItem Value="設備建立日期">設備建立</asp:ListItem>
+                    <asp:ListItem Value="設備修改日期">設備修改</asp:ListItem>
+                    <asp:ListItem Value="作業建立日期">作業建立</asp:ListItem>
+                    <asp:ListItem Value="作業修改日期">作業修改</asp:ListItem>
+                    <asp:ListItem Value="作業上線日期">作業上線</asp:ListItem>
+                    <asp:ListItem Value="購買日期">購買日期</asp:ListItem>
+                </asp:DropDownList>
+                <asp:DropDownList ID="SelDate" runat="server" ForeColor="#009933">
+                    <asp:ListItem Value="1">近一日</asp:ListItem>
+                    <asp:ListItem Value="7">近一週</asp:ListItem>
+                    <asp:ListItem Value="30">近一月</asp:ListItem>
+                    <asp:ListItem Value="90">近一季</asp:ListItem>
+                    <asp:ListItem Value="365">近一年</asp:ListItem>
+                    <asp:ListItem Value="1095">近三年</asp:ListItem>
+                </asp:DropDownList>
+            </td>               
+        </tr>
+
+        <tr>
+            <td colspan="4">
+                <asp:SqlDataSource ID="SqlDataSource11" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="Select [成員] from [View_組織架構] where [性質]='課別' order by [代號]"></asp:SqlDataSource>
+                <asp:CheckBox ID="ChkSQL" runat="server" Font-Size="Small" Text="特殊查詢" />                
+                <asp:DropDownList ID="SelSQL" runat="server" ForeColor="#009933" Visible="true" OnSelectedIndexChanged="SelSQL_SelectedIndexChanged"
+                    AutoPostBack="True" DataSourceID="SqlDataSource10" DataTextField="Item" DataValueField="Memo">
+                </asp:DropDownList>
+                
+                <font size="2" color="black">過濾條件SQL</font>
+                <asp:TextBox ID="TextSQL" Width="400px" runat="server"></asp:TextBox>
+                <asp:LinkButton Visible="false" ID="LinkHostsSplit" runat="server" CssClass="style4" onclick="LinkHostsSplit_Click" ToolTip="將以逗點隔開的主機名稱(請勿留空白)轉換為SQL查詢語法，以便進一步執行進階查詢">主機轉換</asp:LinkButton>
+                &nbsp;
+                <span class="style4" onclick="alert('設定路徑：系統設定->一般設定->SQL範本\n\n而系統設定->顯示欄位->進階查詢的下方有提示所有可設定的欄位名稱');"><u style="cursor: pointer">說明</u></span>
+                <asp:SqlDataSource ID="SqlDataSource10" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="SELECT [Item],[Memo] from Config where Kind='SQL範本' and Config='通用查詢' order by Mark">
+                </asp:SqlDataSource>
+            </td>
+            <td colspan="2">
+                <asp:CheckBox ID="ChkKey" runat="server" Font-Size="Small" Text="關鍵字" />
+                <asp:TextBox ID="TextKey" runat="server" Width="120px"></asp:TextBox>&nbsp;<span class="style5">(逗點)</span>
+            </td>
+        </tr>
+    </table>
+
+    <div align="right">
+        <asp:CheckBox ID="ChkPage" Checked="true" runat="server" Font-Size="Small" Text="分頁" />&nbsp;&nbsp;
+        <asp:Label ID="Label6" runat="server" Font-Size="Small" Text="顯示欄位："></asp:Label>
+        <asp:DropDownList ID="SelShow" runat="server" ForeColor="#009933" Visible="true" DataSourceID="SqlDataSourceShow" DataTextField="Item" DataValueField="Memo">
+        </asp:DropDownList>
+        <asp:SqlDataSource ID="SqlDataSourceShow" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+                    SelectCommand="SELECT [Item],[Memo] from Config where Kind='進階查詢' and (Config='' or Config='通用查詢') order by Mark">
+        </asp:SqlDataSource>
+        <span class="style4" onclick="alert('設定路徑：系統設定->顯示欄位->進階查詢\n\n此處下方有提示所有可設定的欄位名稱');"><u style="cursor: pointer">說明</u> </span>&nbsp;&nbsp;
+        <asp:Button ID="BtnSearch" runat="server" Text="　查　詢　" OnClick="BtnSearch_Click" />
+    </div>
+
+    <p>
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True"
+            BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px"
+            CellPadding="4" CellSpacing="2" DataSourceID="SqlDataSource1" DataKeyNames="設備編號"
+            ForeColor="Black" Font-Size="Small" OnRowCommand="GridView1_RowCommand">
+            <Columns>
+                <asp:ButtonField ButtonType="Button" CommandName="設備" Text="設備" HeaderText="編輯" />
+                <asp:ButtonField ButtonType="Button" CommandName="作業" Text="作業" HeaderText="編輯"  />
+            </Columns>
+            <FooterStyle BackColor="#CCCCCC" />
+            <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Center" />
+            <RowStyle BackColor="White" />
+            <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+            <SortedAscendingCellStyle BackColor="#F1F1F1" />
+            <SortedAscendingHeaderStyle BackColor="#808080" />
+            <SortedDescendingCellStyle BackColor="#CAC9C9" />
+            <SortedDescendingHeaderStyle BackColor="#383838" />
+        </asp:GridView>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
+            SelectCommand=""></asp:SqlDataSource>
+        <br />
+    </p>
+    <div class="style7">
+        總筆數：<asp:TextBox ID="TextCount" runat="server" BackColor="#CCCCCC" ReadOnly="True" Width="60px" CssClass="style7" Font-Bold="True"></asp:TextBox>&nbsp;&nbsp; 
+        總價：<asp:TextBox ID="TextTotal" runat="server" BackColor="#CCCCCC" ReadOnly="True" Width="120px" CssClass="style7" Font-Bold="True"></asp:TextBox>&nbsp;&nbsp; 
+        總額定電流：<asp:TextBox ID="TextSumCurrent" runat="server" BackColor="#CCCCCC" ReadOnly="True" Width="60px" CssClass="style7" Font-Bold="True">0</asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;        		
+		<asp:Button ID="BtnHtml" runat="server" Text="匯出html檔" OnClick="BtnHtml_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
+		<asp:Button ID="BtnExcel" runat="server" Text="匯出csv檔" OnClick="BtnExcel_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="BtnMap" runat="server" OnClick="BtnMap_Click" Text="設備分佈圖" />
+    </div>
+</asp:Content>

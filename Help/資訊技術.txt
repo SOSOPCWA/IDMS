@@ -1,0 +1,15 @@
+[Windows 7]
+
+1. IIS 驗證須設定為ASP.NET模擬，才能開啟網頁
+
+2. 應用程式集區管線模式須設定為傳統，否則VWD無法辨識物件(無法載入物件，模擬層有問題)
+
+3. Session Timeout：應用程式集區 -> 閒置逾時 (似無用)
+
+4. 若VWD讀不到物件時，即不能自動帶出物件名稱 -> 開啟網站時，路徑用\\sos-vm16\d\SSM_WEB\IDMS，不要用磁碟機代號(A:)
+
+5. 為避免電力管理/樹狀結構 hung住，應用程式集區/佇列長度由1000改為10000
+
+6. 列印換頁：<div STYLE="page-break-after: always;">第一頁</div>   第二頁
+
+7. 財產資料庫連線：SQL DB -> 新增連結的伺服器(PMSSVR1) 提供者(Microsoft OLE DB Provider for Oracle) 產品名稱 (Oracle) 資料來源(pmssvr1) 使用此安全性的內容建立

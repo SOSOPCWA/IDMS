@@ -1,0 +1,15 @@
+While dr.Read()   '-- 每一次讀取一列紀錄，直到完畢為止（EOF）。
+
+            For i As Integer = 0 To (dr.FieldCount - 1)
+                 '-- SqlDataReader的 .FieldCount屬性--目前一筆紀錄的資料行（欄位、Column）數。
+
+                '--(1). 先列出欄位名稱。.GetName()
+                 Label1.Text = Label1.Text & "<font color=red>" & dr.GetName(i).ToString() & "</font> -- "
+                 '--(2). 先列出欄位內容。.Item() 或是 .GetValue()
+                 Label1.Text = Label1.Text & dr.GetValue(i).ToString() & "<br />"
+             Next
+
+             Label1.Text = Label1.Text & "<hr />"
+
+         End While
+        '*********************************************(End)

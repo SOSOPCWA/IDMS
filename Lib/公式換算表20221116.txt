@@ -1,0 +1,28 @@
+//2022.11.16 陳彥澤
+可惡！研究了半天，推測是111/3/5左右後修改，改動到ReturnPointerNo(-(X+1)*31-Y)，反正就是map公式離正確x軸差1格
+
+確認公式如下(javascript)
+	x = - parseInt((data+1)/31) - 1
+	y = - (data+1)%31 + 1
+	data = -31*x - y - 31
+
+111/3/6之後，用SQL將380項x+1，錯了不管，反正不管怎麼調都有填錯的！
+	UPDATE [dbo].[Device2]
+    SET [Xall] = [Xall] + 1
+	WHERE [CreateDate]  > '2022-03-06 00:00:00.000'
+
+
+為了避免問題，注意以下幾點：
+1、這兩句為「定錨」，不要動
+
+	ReturnPointerNo(-(X+1)*31-Y)
+	window.open('../Device/Device.aspx?Search=Map&X='+X+'&Y='+Y,'_blank');
+
+2、其他程式部分均為為圖片座標轉換，如果圖片換了，記得修改map.aspx、map.aspx.cs這2份
+大致可以理解為以下公式，x',y'為圖片實際位置，a,b,c,d為常數變數
+(公式僅為示意)
+
+	x' = ax + b
+	y' = cy + d
+	
+3、因為bigplot.jpg有改過，可是資料庫座標沒改...所以E01機櫃那整排的座標是錯的

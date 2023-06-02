@@ -1,0 +1,141 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage"  %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>IDMS</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style1
+        {
+            text-align: center;
+            font-size: x-large;
+        }
+        .style2
+        {
+            color: #006600;
+        }
+        .style3
+        {
+            color: #003300;
+        }
+    </style>
+</head>
+<body bgcolor="LightGray">
+    <form id="form1" runat="server">
+    <div>
+        <div class="style1">            
+            <table width="100%"><tr>
+            <td width="20%"></td>
+            <td width="60%" align="center">
+                <asp:HyperLink ID="lnIDMS" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="Blue" NavigateUrl="~/IDMS/Default.aspx">資訊中心資源管理系統(IDMS)</asp:HyperLink>&nbsp;&nbsp;
+                <asp:Label ID="lblTest" runat="server" Text=" (測試機)" Font-Bold="True" Font-Size="X-Large" ForeColor="red" Visible="false"></asp:Label>
+            </td>
+            <td width="20%" align="right" style="font-weight:700;color:#FF0000;font-size: xx-small;">登入：<asp:Label ID="LblUserName" runat="server"></asp:Label></td>
+            </tr></table>
+            <strong>  
+                <asp:Menu ID="Menu1" runat="server" BackColor="#E3EAEB" DynamicHorizontalOffset="2"
+                    Font-Names="標楷體" Font-Size="Medium" ForeColor="#666666" Orientation="Horizontal"
+                    StaticSubMenuIndent="10px" BorderStyle="Groove" Font-Bold="True" Font-Italic="False"
+                    RenderingMode="Table" Width="100%" OnMenuItemClick="Menu_MenuItemClick">
+                    <DynamicHoverStyle BackColor="#666666" ForeColor="White" />
+                    <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                    <DynamicMenuStyle BackColor="#E3EAEB" />
+                    <DynamicSelectedStyle BackColor="#1C5E55" />
+                    <Items>
+                        <asp:MenuItem Text="設備管理" Value="設備管理" Selectable="False" ToolTip="實體設備管理介面，硬體負責人維護"></asp:MenuItem>
+                        <asp:MenuItem Text="作業管理" Value="作業管理" NavigateUrl="AP/AP.aspx" ToolTip="作業系統管理介面，軟體負責人維護">
+                            <asp:MenuItem Text="作業主機" Value="作業主機" NavigateUrl="AP/AP.aspx" ToolTip="作業主機管理介面"></asp:MenuItem>
+                            <asp:MenuItem Text="系統資源" Value="系統資源" NavigateUrl="AP/SysEdit.aspx" ToolTip="系統資源(系統、功能、資料)樹狀編輯介面"></asp:MenuItem>
+                            <asp:MenuItem Text="系統查詢" Value="系統查詢" NavigateUrl="AP/Sys.aspx" ToolTip="系統資源(系統、功能、資料)一般查詢介面"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="套裝軟體" Value="套裝軟體" Selectable="False" ToolTip="套裝軟體管理介面，軟體小組維護">
+                            <asp:MenuItem NavigateUrl="SoftWare/Sw.aspx" Text="軟體保管(主檔)" Value="軟體保管" ToolTip="軟體保管單"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="SoftWare/Ask.aspx" Text="軟體申請(授權)" Value="軟體申請" ToolTip="軟體使用申請單"></asp:MenuItem>                             
+                            <asp:MenuItem NavigateUrl="SoftWare/Search.aspx" Text="軟體查詢(進階)" Value="軟體查詢" ToolTip="軟體整合查詢"></asp:MenuItem>
+                            <asp:MenuItem Text="軟體查詢(簡易)" Value="簡易查詢" Selectable="False" ToolTip="軟體簡易查詢">
+                                <asp:MenuItem NavigateUrl="SoftWare/SwUser.aspx" Text="依使用者" Value="依使用者" ToolTip="依課別、使用者查詢軟體授權"></asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="SoftWare/SwName.aspx" Text="依軟體名" Value="依軟體名" ToolTip="依軟體名稱查詢、並可以關鍵字篩選"></asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="SoftWare/SwStatus.aspx" Text="申請狀態" Value="申請狀態" ToolTip="依軟體名稱列出軟體申請數量狀態"></asp:MenuItem>
+                            </asp:MenuItem> 
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="秘總財產" Value="秘總財產" NavigateUrl="Property/Property.aspx" ToolTip="每天自動與財產管理系統同步更新一次"></asp:MenuItem>
+                        <asp:MenuItem Text="機房專區" Value="機房專區" Selectable="False" ToolTip="機房實體環境管理介面，環境小組維護">
+                            <asp:MenuItem Text="迴路管理" Value="迴路管理" Selectable="False" ToolTip="各種迴路上下游樹狀結構圖"> 
+                                <asp:MenuItem Text="接電迴路" Value="接電迴路" NavigateUrl="SOS/PowerTree.aspx" ToolTip="接電設備上下游樹狀結構圖"></asp:MenuItem>                               
+                                <asp:MenuItem Text="接電迴路(圖示)"  NavigateUrl="Device/DeviceTree.aspx" ToolTip="接電設備上下游樹狀結構圖"></asp:MenuItem>                               
+                                <asp:MenuItem Text="各區電力" Value="各區電力" NavigateUrl="SOS/PowerPlace.aspx" ToolTip="依放置地點顯示各區接電設備"></asp:MenuItem> 
+                                <asp:MenuItem Text="接網迴路" Value="接網迴路" NavigateUrl="SOS/NetTree.aspx" ToolTip="接網設備上下游樹狀結構圖"></asp:MenuItem>
+                                <asp:MenuItem Text="群組空調" Value="各區電力" NavigateUrl="Device/ColdTree.aspx" ToolTip="空調圖示用"></asp:MenuItem> 
+                                <asp:MenuItem Text="群組編輯" Value="群組編輯" NavigateUrl="Device/Group.aspx" ToolTip="編輯群組單位"></asp:MenuItem> 
+                                <asp:MenuItem Text="系統迴路" Value="系統迴路" NavigateUrl="AP/SysTree.aspx" ToolTip="系統資源上下游樹狀結構圖"></asp:MenuItem>
+                                <asp:MenuItem Text="整合迴路" Value="整合迴路" NavigateUrl="AP/AllTree.aspx" ToolTip="接電、接網、主機、系統迴路上下游樹狀結構圖"></asp:MenuItem>
+                                <asp:MenuItem Text="整合回溯" Value="整合回溯" NavigateUrl="AP/AllBack.aspx" ToolTip="整合迴路由下游(系統)回溯至上游(接電)之樹狀結構圖"></asp:MenuItem>  
+                            </asp:MenuItem>                           
+                            <asp:MenuItem Text="局屬網路" Value="局屬網路" NavigateUrl="SOS/WII.aspx?SC=tn" ToolTip="局屬測站網路資訊"></asp:MenuItem> 
+                            <asp:MenuItem Text="機器清查" Value="機器清查" NavigateUrl="SOS/Check.aspx" ToolTip="機器清查與結果註記工具"></asp:MenuItem>
+                            <asp:MenuItem Text="機櫃空間" Value="機櫃空間" NavigateUrl="SOS/Rack.aspx" ToolTip="機櫃空間配置圖，可依資產價值、設備狀態、關機順序、機器清查標記顏色"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Selectable="False" Text="進階查詢" Value="進階查詢">
+                            <asp:MenuItem NavigateUrl="Search/Search.aspx" Text="通用查詢" Value="通用查詢" ToolTip="實體設備與作業主機整合查詢介面"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Search/Group.aspx" Text="群組查詢" Value="群組查詢" ToolTip="查詢維護群組成員一覽表"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Search/Discard.aspx" Text="報廢查詢" Value="報廢查詢" ToolTip="報廢設備查詢介面(其它地方不會顯示)"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Search/Duty.aspx" Text="權責資料" Value="權責資料" ToolTip="列出權責人員負責的所有資料(實體設備、作業主機、系統資源)"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="生命履歷" Value="生命履歷" Selectable="False">
+                            <asp:MenuItem NavigateUrl="Life/LifeLog.aspx" Text="生命履歷" Value="生命履歷" ToolTip="異動記錄查詢介面"></asp:MenuItem> 
+                            <asp:MenuItem NavigateUrl="Life/Check.aspx" Text="資料查核" Value="資料查核" ToolTip="待修正資料查核介面，每週一自動更新，亦可手動即時更新"></asp:MenuItem>                           
+                            <asp:MenuItem NavigateUrl="Life/Repeat.aspx" Text="重複資料" Value="重複資料" ToolTip="重複資料查詢介面"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="系統設定" Value="系統設定" Selectable="False">
+                            <asp:MenuItem NavigateUrl="Config/Config.aspx?kind=組織架構" Text="組織架構" Value="組織架構" ToolTip="設定各課成員資料"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Config/Config.aspx?kind=維護群組" Text="維護群組" Value="維護群組" ToolTip="設定系統負責人之群組"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Config/Config.aspx?kind=一般設定" Text="一般設定" Value="一般設定" ToolTip="列出樹狀系統設定第一層之選項"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Config/Pointer.aspx" Text="定位設定" Value="定位設定" ToolTip="放置地點選項及坐標定位"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Config/Config.aspx?kind=設備型態" Text="設備型態" Value="設備型態" ToolTip="可設定該設備型態之種類，以及名稱可否重複"></asp:MenuItem>                            
+                            <asp:MenuItem NavigateUrl="Config/Config.aspx?kind=狀態設定" Text="狀態設定" Value="狀態設定" ToolTip="可設定狀態之選項"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Config/Config.aspx?kind=欄位說明" Text="欄位說明" Value="欄位說明" ToolTip="欄位功能之說明"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Config/Config.aspx?kind=顯示欄位" Text="顯示欄位" Value="顯示欄位" ToolTip="查詢後要顯示的欄位及順序"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Selectable="False" Text="說明文件" Value="說明文件">                            
+                            <asp:MenuItem Text="系統手冊" Value="系統手冊" Selectable="False">
+                                <asp:MenuItem Text="系統簡介"   Value="系統簡介"   NavigateUrl="Default.aspx" Target="_self" ToolTip="請參考首頁說明"></asp:MenuItem>
+                                <asp:MenuItem Text="系統架構"   Value="系統架構"   NavigateUrl="Help/系統架構圖.doc"         Target="_blank"></asp:MenuItem> 
+                                <asp:MenuItem Text="資產管理"   Value="資產管理"   NavigateUrl="Help/資產管理簡介.htm"       Target="_blank"></asp:MenuItem> 
+                                <asp:MenuItem Text="設計規格"   Value="設計規格"   NavigateUrl="Help/設計規格.doc"           Target="_blank"></asp:MenuItem> 
+                                <asp:MenuItem Text="功能規格"   Value="功能規格"   NavigateUrl="Help/功能規格.doc"           Target="_blank"></asp:MenuItem>                                                              
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="管理手冊" Value="管理手冊" Selectable="False">
+                                <asp:MenuItem Text="權限說明"   Value="權限說明"   NavigateUrl="Help/權限管理與生命履歷.txt" Target="_blank"></asp:MenuItem>                                
+                                <asp:MenuItem Text="人員管理"   Value="人員管理"   NavigateUrl="~/sop/sop.asp?SEL_Code=3999c01" Target="_blank"></asp:MenuItem>
+                                <asp:MenuItem Text="資料安全"   Value="資料安全"   NavigateUrl="~/sop/sop.asp?SEL_Code=3999b02" Target="_blank"></asp:MenuItem>
+                                <asp:MenuItem Text="地點管理"   Value="地點管理"   NavigateUrl="~/sop/sop.asp?SEL_Code=3999f10" Target="_blank"></asp:MenuItem>
+                                <asp:MenuItem Text="欄位說明"   Value="欄位說明"   ToolTip="請自行至各編輯介面瀏覽各欄位的說明"></asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="Help/軟體資料匯入說明.txt" Text="軟體匯入" Value="軟體匯入" ToolTip="軟體資料(Excel)匯入說明" Target="_blank"></asp:MenuItem>                                
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="使用手冊"   Value="使用手冊"   NavigateUrl="Help/IDMS使用手冊.pdf"      Target="_blank" ToolTip="使用者操作介面指引">
+                                <asp:MenuItem Text="使用手冊"   Value="使用手冊"   NavigateUrl="Help/IDMS使用手冊.pdf"      Target="_blank" ToolTip="使用者操作介面指引"></asp:MenuItem>
+                                <asp:MenuItem Text="模擬情境"   Value="模擬情境"   NavigateUrl="Help/模擬情境考題.txt"      Target="_blank" ToolTip="資訊設備移入機房所應建置資料之情境模擬考題"></asp:MenuItem>
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="異動公告"   Value="異動公告"   NavigateUrl="Help/IDMS異動公告.txt"      Target="_blank"></asp:MenuItem>
+                            <asp:MenuItem Text="用電規定"   Value="用電規定"   NavigateUrl="Help/2012機房用電規定.doc"  Target="_blank"></asp:MenuItem>                            
+                            <asp:MenuItem Text="機房平面圖" Value="機房平面圖" NavigateUrl="Lib/map.aspx" Target="_blank"></asp:MenuItem>
+                            <asp:MenuItem Text="分區配置圖" Value="分區配置圖" NavigateUrl="images/分區配置圖.jpg"      Target="_blank"></asp:MenuItem>
+                            <asp:MenuItem Text="空白移入單" Value="空白移入單" NavigateUrl="Device/Enter.aspx"          Target="_blank"></asp:MenuItem>                             
+                            <asp:MenuItem Text="(測試機)"   Value="測試機"     NavigateUrl="http://10.6.1.11:12345/IDMS" Target="_self" ToolTip="測試機資料可任意修改"></asp:MenuItem>  
+                        </asp:MenuItem>
+                    </Items>
+                    <StaticHoverStyle BackColor="#666666" ForeColor="White" />
+                    <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                    <StaticSelectedStyle BackColor="#1C5E55" />
+                </asp:Menu>
+            </strong>
+        </div>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>    
+    </form>
+</body>
+</html>

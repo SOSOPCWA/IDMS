@@ -1,0 +1,20 @@
+【前言】：軟體小組異動資料以Excel檔為主，而非IDMS，故此說明資料匯入步驟。
+
+
+【步驟】：
+
+1. 將軟體小組提供的Excel檔複製到sos-vm16，USB歸還
+
+2. 刪除IDMS資料庫的[軟體管理]表格
+
+3. 利用SQL Enterprise Manager介面的匯入資料功能，將Excel檔匯到IDMS資料庫的[軟體管理]資料表
+
+4. 刪除[軟體管理]後面多餘的欄位
+
+5. 檢查匯入程式碼(IDMS\Job\In_SwAll.vbs)，是否符合Excel的schema，不符之處要修改code
+
+6. 執行In_SwAll.vbs，若有Error，改程式後重新執行，可參考In_SwAll.log、In_Error.log研究匯入情形
+
+7. 若In_Error.log有資料格式之類的錯誤，mail軟體小組修正Excel後重新匯入(不要直接改資料，否則下次匯的還是錯的資料)
+
+8. 刪除Excel檔
