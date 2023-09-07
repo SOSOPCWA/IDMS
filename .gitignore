@@ -7,6 +7,10 @@
 images/
 Job/*
 
+<<<<<<< HEAD
 !image/.gitkeep	
+=======
+!image/.gitkeep
+>>>>>>> origin/main
 
 
