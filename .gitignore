@@ -1,1 +1,10 @@
+# 忽略所有.png和.log文件
+
 *.log
+*.png
+
+# 忽略image文件夹中的所有内容
+images/*
+Job/*
+
+!image/.gitkeep

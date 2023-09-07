@@ -49,7 +49,7 @@ public partial class Device_TreeEdit : System.Web.UI.Page
                 lblDevName.Text = HttpUtility.HtmlEncode(dr["設備名稱"].ToString());
                 lblDevice.Text =  HttpUtility.HtmlEncode(dr["設備用途"].ToString() + " " + dr["放置地點"].ToString() + " " + dr["高度"].ToString() + "(U)");
                 lblMt.Text = HttpUtility.HtmlEncode(dr["維護人員"].ToString());
-                lblTree.Text = HttpUtility.HtmlEncode(GetPath(dr["設備編號"].ToString(), "接電", "") + "＊ BRC" + GetPath(dr["設備編號"].ToString(), "接網", "") + "＊ BRC" + GetPath(dr["設備編號"].ToString(), "空調", "") + "＊").Replace("BRC", "</br>");
+                lblTree.Text = HttpUtility.HtmlEncode(GetPath(dr["設備編號"].ToString(), "接電", "") + "＊ AAD" + GetPath(dr["設備編號"].ToString(), "接網", "") + "＊ AAD" + GetPath(dr["設備編號"].ToString(), "空調", "") + "＊").Replace("AAD", "</br>");
             }        
         }
         else{ //空調設備
@@ -623,9 +623,9 @@ public partial class Device_TreeEdit : System.Web.UI.Page
     protected void Conn_Selected(ListBox ListName,Label lbl,string tbl) //點選選項，列出放置地點與迴路路徑
     {
         lbl.Text = HttpUtility.HtmlEncode(GetValue("select [放置地點] from [View_設備管理] where [設備編號]=@LN", "@LN", ListName.SelectedValue));
-        if (tbl == "接電" | tbl == "設備") lbl.Text = HttpUtility.HtmlEncode(lbl.Text + "BRA" + GetPath(ListName.SelectedValue, "接電", "") + "＊").Replace("BRA", "<br/>");
-        if (tbl == "接網" | tbl == "設備") lbl.Text = HttpUtility.HtmlEncode(lbl.Text + "BRA" + GetPath(ListName.SelectedValue, "接網", "") + "＊").Replace("BRA", "<br/>");        
-        if (tbl == "接冷" | tbl == "設備") lbl.Text = HttpUtility.HtmlEncode(lbl.Text + "BRA" + GetPath(ListName.SelectedValue, "空調", "") + "＊").Replace("BRA", "<br/>");        
+        if (tbl == "接電" | tbl == "設備") lbl.Text = HttpUtility.HtmlEncode(lbl.Text + "AAD" + GetPath(ListName.SelectedValue, "接電", "") + "＊").Replace("AAD", "<br/>");
+        if (tbl == "接網" | tbl == "設備") lbl.Text = HttpUtility.HtmlEncode(lbl.Text + "AAD" + GetPath(ListName.SelectedValue, "接網", "") + "＊").Replace("AAD", "<br/>");        
+        if (tbl == "接冷" | tbl == "設備") lbl.Text = HttpUtility.HtmlEncode(lbl.Text + "AAD" + GetPath(ListName.SelectedValue, "空調", "") + "＊").Replace("AAD", "<br/>");        
     }
     protected string GetPath(string DevNo,string tbl, string tail)   //取得迴路路徑
     {
@@ -644,7 +644,7 @@ public partial class Device_TreeEdit : System.Web.UI.Page
             DnPath = dr["設備名稱"].ToString() + " → " + tail;
             UpPath = GetPath(dr["上游編號"].ToString(), tbl, DnPath);
             if (i == 1) path = UpPath + DnPath;
-            else path = path + "＊ BRC" + UpPath + DnPath;
+            else path = path + "＊ AAD" + UpPath + DnPath;
 
             path = path.Replace(DnPath + DnPath, DnPath);
         }
