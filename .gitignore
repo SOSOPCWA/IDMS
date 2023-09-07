@@ -4,7 +4,9 @@
 *.png
 
 # 忽略image文件夹中的所有内容
-images/*
+images/
 Job/*
 
-!image/.gitkeep
+!image/.gitkeep	
+
+
