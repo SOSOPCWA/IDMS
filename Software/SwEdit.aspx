@@ -70,7 +70,7 @@
                          AutoPostBack="True" OnSelectedIndexChanged="SelUnit_SelectedIndexChanged">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="SqlDataSourceUnit" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
-                        SelectCommand="SELECT [Item] FROM [Config] WHERE [Kind]='資訊中心' order by [Mark]">
+                        SelectCommand="SELECT [Item] FROM [Config] WHERE [Kind]='數值資訊組' order by [Mark]">
                     </asp:SqlDataSource>&nbsp;&nbsp;
                     人員：<asp:TextBox ID="TextAsker" runat="server" ForeColor="Green"></asp:TextBox>&nbsp;
                     <asp:DropDownList ID="SelAsker" runat="server" ForeColor="#009933" DataSourceID="SqlDataSourceAsker"

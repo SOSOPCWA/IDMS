@@ -41,7 +41,7 @@
                     SelectCommand="select [Item] from [Config] where [Kind]='資源種類' order by [Mark]">
                 </asp:SqlDataSource>
                 
-                <asp:CheckBox ID="ChkUnit" runat="server" Font-Size="Small" Text="課別" />
+                <asp:CheckBox ID="ChkUnit" runat="server" Font-Size="Small" Text="科別" />
                 <asp:DropDownList ID="SelUnit" runat="server" ForeColor="#009933" Visible="true"
                     AutoPostBack="True" DataSourceID="SqlDataSourceUnit" DataTextField="成員" DataValueField="成員">
                 </asp:DropDownList>

@@ -41,7 +41,7 @@
                         DataSourceID="SqlDataSourceUnitSw" DataTextField="成員" DataValueField="成員">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="SqlDataSourceUnitSw" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
-                        SelectCommand="Select [成員] from [View_組織架構] where [性質]='課別'and [單位]='資訊中心' order by [代號]"></asp:SqlDataSource>                    
+                        SelectCommand="Select [成員] from [View_組織架構] where [性質]='課別'and [單位]='數值資訊組' order by [代號]"></asp:SqlDataSource>                    
                     &nbsp;&nbsp;
                     <asp:CheckBox ID="ChkUserSw" runat="server" />軟體人員
                     <asp:DropDownList ID="SelUserSw" runat="server" ForeColor="#009933" Visible="true"
@@ -60,7 +60,7 @@
                         DataSourceID="SqlDataSourceUnitLcs" DataTextField="成員" DataValueField="成員">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="SqlDataSourceUnitLcs" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
-                        SelectCommand="Select [成員] from [View_組織架構] where [性質]='課別'and [單位]='資訊中心' order by [代號]"></asp:SqlDataSource>                    
+                        SelectCommand="Select [成員] from [View_組織架構] where [性質]='課別'and [單位]='數值資訊組' order by [代號]"></asp:SqlDataSource>                    
                     &nbsp;&nbsp;
                     <asp:CheckBox ID="ChkUserLcs" runat="server" />授權人員
                     <asp:DropDownList ID="SelUserLcs" runat="server" ForeColor="#009933" Visible="true"
@@ -79,7 +79,7 @@
                         DataSourceID="SqlDataSourceUnitUse" DataTextField="成員" DataValueField="成員">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="SqlDataSourceUnitUse" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
-                        SelectCommand="Select [成員] from [View_組織架構] where [性質]='課別'and [單位]='資訊中心' order by [代號]"></asp:SqlDataSource>                    
+                        SelectCommand="Select [成員] from [View_組織架構] where [性質]='課別'and [單位]='數值資訊組' order by [代號]"></asp:SqlDataSource>                    
                     &nbsp;&nbsp;
                     <asp:CheckBox ID="ChkUserUse" runat="server" />使用人員
                     <asp:DropDownList ID="SelUserUse" runat="server" ForeColor="#009933" Visible="true"

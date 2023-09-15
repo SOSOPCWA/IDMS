@@ -23,7 +23,7 @@
             SelectCommand="SELECT [Item] FROM [Config] WHERE (([Kind] = @Kind) OR ([Kind] = @Kind2)) ORDER BY [mark]">
             <SelectParameters>
                 <asp:Parameter DefaultValue="維護群組" Name="Kind" Type="String" />
-                <asp:Parameter DefaultValue="資訊中心" Name="Kind2" Type="String" />
+                <asp:Parameter DefaultValue="數值資訊組" Name="Kind2" Type="String" />
             </SelectParameters>
         </asp:SqlDataSource>&nbsp;
         <asp:CheckBox ID="ChkMt" runat="server" Text="人員" Font-Size="Small" />

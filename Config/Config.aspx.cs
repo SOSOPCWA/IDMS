@@ -317,7 +317,7 @@ public partial class Config_Config : System.Web.UI.Page
         if (dr.Read()) ChkUnit=dr[0].ToString();
         cmd.Cancel(); cmd.Dispose(); dr.Close(); Conn.Close(); Conn.Dispose();
 
-        if (UserID != "operator" & (UnitName == "電腦操作課" | UnitName == "系統控制課" | UnitName == "技術支援課" | ChkUnit == "資訊中心" | InGroup(UserName, ChkUnit))) return (true);
+        if (UserID != "operator" & (UnitName == "作業管控科" | UnitName == "系統管控科" | UnitName == "技術支援課" | ChkUnit == "數值資訊組" | InGroup(UserName, ChkUnit))) return (true);
         else return (false);
     }
 	

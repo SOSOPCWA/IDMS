@@ -14,7 +14,7 @@
             ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>" 
             SelectCommand="SELECT [Item] FROM [Config] WHERE (([Kind] = @Kind)) ORDER BY [mark]">
             <SelectParameters>
-                <asp:Parameter DefaultValue="資訊中心" Name="Kind" Type="String" />
+                <asp:Parameter DefaultValue="數值資訊組" Name="Kind" Type="String" />
             </SelectParameters>
         </asp:SqlDataSource>
         <asp:DropDownList ID="SelMt" runat="server" DataSourceID="SqlDataSource2" ForeColor="#009933" 

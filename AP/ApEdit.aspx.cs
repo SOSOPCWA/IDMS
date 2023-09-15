@@ -165,15 +165,15 @@ public partial class Device_ApEdit : System.Web.UI.Page
     {
         SqlConnection Conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["IDMSConnectionString"].ConnectionString);
         Conn.Open();
-        SqlCommand cmd = new SqlCommand("SELECT Kind FROM Config WHERE Kind in (select Item from Config where Kind='資訊中心') and Item='" + Sw + "'", Conn);
+        SqlCommand cmd = new SqlCommand("SELECT Kind FROM Config WHERE Kind in (select Item from Config where Kind='數值資訊組') and Item='" + Sw + "'", Conn);
         SqlDataReader dr = null;
         dr = cmd.ExecuteReader();
         string cfg = ""; 
-        if (dr.Read()) cfg=dr[0].ToString();  //先讀資訊中心各課成員(各課優先)
+        if (dr.Read()) cfg=dr[0].ToString();  //先讀數值資訊組各課成員(各課優先)
         else //再讀其它中心或維護群組(分組次之)
         {
             cmd.Cancel(); cmd.Dispose(); dr.Close();
-            cmd = new SqlCommand("SELECT Kind FROM Config WHERE Kind not in (select Item from Config where Kind='資訊中心') and Item='" + Sw + "'", Conn);
+            cmd = new SqlCommand("SELECT Kind FROM Config WHERE Kind not in (select Item from Config where Kind='數值資訊組') and Item='" + Sw + "'", Conn);
             dr = cmd.ExecuteReader();
             if (dr.Read()) cfg=dr[0].ToString();
         }
@@ -572,7 +572,7 @@ public partial class Device_ApEdit : System.Web.UI.Page
         string Hw = GetValue("IDMS", "select [維護人員] from [實體設備] where [設備編號]=" + Dno); //設備維護人員
         string Older = GetValue("IDMS", "select [維護人員] from [作業主機] where [作業編號]=" + Dno);
 
-        if (UserID != "operator" & (InGroup(UserName, Sw) | InGroup(UserName, Older) | InGroup(UserName, Hw) | UnitName == "系統控制課" | UnitName == "電腦操作課" | InGroup(UserName, "軟體小組") | InGroup(UserName, "網管小組"))) return (true);
+        if (UserID != "operator" & (InGroup(UserName, Sw) | InGroup(UserName, Older) | InGroup(UserName, Hw) | UnitName == "系統管控科" | UnitName == "作業管控科" | InGroup(UserName, "軟體小組") | InGroup(UserName, "網管小組"))) return (true);
         else return (false);
     }
 
@@ -626,9 +626,9 @@ public partial class Device_ApEdit : System.Web.UI.Page
     {
         SqlConnection Conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["IDMSConnectionString"].ConnectionString);
         Conn.Open();
-        string SQL = "(select Kind from Config where Item='" + Maintainor + "' and Kind in (select Item from Config where Kind='資訊中心'))"
-            + " UNION (select Config from Config where Item='" + Maintainor + "' and kind in (select Item from Config where Kind='維護群組') and Kind<>'資訊中心')"
-            + " UNION (select Item from Config where Item='" + Maintainor + "' and Kind='資訊中心')";
+        string SQL = "(select Kind from Config where Item='" + Maintainor + "' and Kind in (select Item from Config where Kind='數值資訊組'))"
+            + " UNION (select Config from Config where Item='" + Maintainor + "' and kind in (select Item from Config where Kind='維護群組') and Kind<>'數值資訊組')"
+            + " UNION (select Item from Config where Item='" + Maintainor + "' and Kind='數值資訊組')";
         SqlCommand cmd = new SqlCommand(SQL, Conn);
         SqlDataReader dr = null;
         dr = cmd.ExecuteReader();

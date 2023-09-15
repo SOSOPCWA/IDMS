@@ -100,7 +100,7 @@
                         SelectCommand="SELECT [Item] FROM [Config] WHERE (Kind='組織架構' and Item=@MIC) or ([Kind] = @Kind or Kind=@MIC) ORDER BY [mark]">
                         <SelectParameters>
                             <asp:Parameter DefaultValue="維護群組" Name="Kind" Type="String" />
-                            <asp:Parameter DefaultValue="資訊中心" Name="MIC" Type="String" />
+                            <asp:Parameter DefaultValue="數值資訊組" Name="MIC" Type="String" />
                         </SelectParameters>
                     </asp:SqlDataSource>
                     <asp:DropDownList ID="SelMt" runat="server" AutoPostBack="True" ForeColor="#009933"

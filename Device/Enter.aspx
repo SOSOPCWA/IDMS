@@ -18,13 +18,13 @@
         }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>氣象資訊中心硬體設備移入機房申請單</title>
+    <title>氣象數值資訊組硬體設備移入機房申請單</title>
 </head>
 <body>
     <form id="form1" runat="server">
     <br />
     <div align="center" style="margin: auto; width: 640px; font-size: 16px; font-family: 標楷體;font-weight: bold;">
-        氣象資訊中心<br />硬體設備移入機房申請單
+        氣象數值資訊組<br />硬體設備移入機房申請單
     </div>
 
     <br />
@@ -166,7 +166,7 @@
     <div style="width: 640px; font-family: 標楷體; font-size: 16px; margin: auto;">機房管理單位填寫</div>
     <table border="1" cellspacing="0" cellpadding="0">
         <tr style="padding: 3px">
-            <td width="16%">管理單位:<br/>電腦操作課</td>
+            <td width="16%">管理單位:<br/>作業管控科</td>
             <td width="84%" align="center">審核日期:______年___月___日</td>
         </tr>
 
@@ -264,7 +264,7 @@
 								<br/>公式參考：V=IR(單相)，V=IR×√3 (三相)，W=VI，KW=W/1000=kva，<br/>請儘量評估實電流，
 								可不考慮功率因數PF（與電力耗損計算相關）。</li>
                                 <li>UPS：請依各單位機房之不斷電系統設備配置填寫。
-								<br/>例如氣象資訊中心之UPS有550UPS、550UPSN、600UPS。</li>
+								<br/>例如氣象數值資訊組之UPS有550UPS、550UPSN、600UPS。</li>
                              
                                 <li>熱量排放：請洽設備廠商，或自行查閱電源供應器說明。
 								<br/>BTU記算式：BTU = 伏特數 x 安培數 x 3.41。</li>

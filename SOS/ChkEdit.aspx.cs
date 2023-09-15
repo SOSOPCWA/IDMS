@@ -136,14 +136,14 @@ public partial class SOS_ChkEdit : System.Web.UI.Page
         SqlCommand cmd = new SqlCommand("SELECT [課別] FROM [View_組織架構] WHERE [性質]='員工' and [成員]='" + Pname + "'", Conn);
         SqlDataReader dr = null;
         dr = cmd.ExecuteReader();
-        if (dr.Read())  //先讀資訊中心各課成員(各課優先)
+        if (dr.Read())  //先讀數值資訊組各課成員(各課優先)
         {
             return (dr[0].ToString());
         }
         else  //再讀其它中心或維護群組(分組次之)
         {
             cmd.Cancel(); dr.Close();
-            cmd = new SqlCommand("SELECT Kind FROM Config WHERE Kind not in (select Item from Config where Kind='資訊中心') and Item='" + Pname + "'", Conn);
+            cmd = new SqlCommand("SELECT Kind FROM Config WHERE Kind not in (select Item from Config where Kind='數值資訊組') and Item='" + Pname + "'", Conn);
             dr = cmd.ExecuteReader();
             if (dr.Read())
             {

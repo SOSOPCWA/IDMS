@@ -123,7 +123,7 @@
                         DataSourceID="SqlDataSourceKeyerUnit" DataTextField="Item" DataValueField="Item">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="SqlDataSourceKeyerUnit" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
-                        SelectCommand="SELECT [Item] FROM [Config] WHERE [Kind]='資訊中心' order by [Mark]">
+                        SelectCommand="SELECT [Item] FROM [Config] WHERE [Kind]='數值資訊組' order by [Mark]">
                     </asp:SqlDataSource>&nbsp;&nbsp;
                     <asp:DropDownList ID="SelKeyer" runat="server" ForeColor="#009933" DataSourceID="SqlDataSourceKeyer"
                         DataTextField="Item" DataValueField="Item" AutoPostBack="True" OnSelectedIndexChanged="SelKeyer_SelectedIndexChanged">
@@ -262,7 +262,7 @@
                         DataSourceID="SqlDataSourceUnitLcs" DataTextField="Item" DataValueField="Item">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="SqlDataSourceUnitLcs" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
-                        SelectCommand="SELECT [Item] FROM [Config] WHERE [Kind]='資訊中心' order by [Mark]">
+                        SelectCommand="SELECT [Item] FROM [Config] WHERE [Kind]='數值資訊組' order by [Mark]">
                     </asp:SqlDataSource>&nbsp;&nbsp;
                     使用：<asp:Label ID="lblUnitUse" runat="server"></asp:Label>
                 </asp:TableCell>

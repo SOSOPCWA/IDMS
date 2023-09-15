@@ -29,7 +29,7 @@
             <table width="100%"><tr>
             <td width="20%"></td>
             <td width="60%" align="center">
-                <asp:HyperLink ID="lnIDMS" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="Blue" NavigateUrl="~/IDMS/Default.aspx">資訊中心資源管理系統(IDMS)</asp:HyperLink>&nbsp;&nbsp;
+                <asp:HyperLink ID="lnIDMS" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="Blue" NavigateUrl="~/IDMS/Default.aspx">數值資訊組資源管理系統(IDMS)</asp:HyperLink>&nbsp;&nbsp;
                 <asp:Label ID="lblTest" runat="server" Text=" (測試機)" Font-Bold="True" Font-Size="X-Large" ForeColor="red" Visible="false"></asp:Label>
             </td>
             <td width="20%" align="right" style="font-weight:700;color:#FF0000;font-size: xx-small;">登入：<asp:Label ID="LblUserName" runat="server"></asp:Label></td>

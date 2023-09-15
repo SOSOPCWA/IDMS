@@ -92,10 +92,10 @@ public partial class Search_Search : System.Web.UI.Page
                     case "空機": SQL = SQL + " and ([設備型態]='系統設備' or [設備型態]='網路設備') and [作業編號] is null"; break;
                     case "系統主機": SQL = SQL + " and [作業編號]>0 and [設備型態]='系統設備'"; break;
                     case "網路主機": SQL = SQL + " and [作業編號]>0 and [設備型態]='網路設備'"; break;
-                    case "中心設備": SQL = SQL + " and [設備維護人員] in (select [成員] from [View_組織架構] where [單位]='資訊中心')"; break;
-                    case "代管設備": SQL = SQL + " and [設備維護人員] not in (select [成員] from [View_組織架構] where [單位]='資訊中心')"; break;
-                    case "中心主機": SQL = SQL + " and [作業維護人員] in (select [成員] from [View_組織架構] where [單位]='資訊中心')"; break;
-                    case "代管主機": SQL = SQL + " and [作業維護人員] not in (select [成員] from [View_組織架構] where [單位]='資訊中心')"; break;
+                    case "中心設備": SQL = SQL + " and [設備維護人員] in (select [成員] from [View_組織架構] where [單位]='數值資訊組')"; break;
+                    case "代管設備": SQL = SQL + " and [設備維護人員] not in (select [成員] from [View_組織架構] where [單位]='數值資訊組')"; break;
+                    case "中心主機": SQL = SQL + " and [作業維護人員] in (select [成員] from [View_組織架構] where [單位]='數值資訊組')"; break;
+                    case "代管主機": SQL = SQL + " and [作業維護人員] not in (select [成員] from [View_組織架構] where [單位]='數值資訊組')"; break;
                     case "個人主機": SQL = SQL + " and [系統名稱]='個人作業系統'"; break;
                     case "伺服主機": SQL = SQL + " and [系統名稱]<>'個人作業系統'"; break;
                     case "實體主機": SQL = SQL + " and [作業編號]>0 and [設備種類]<>'虛擬主機'"; break;

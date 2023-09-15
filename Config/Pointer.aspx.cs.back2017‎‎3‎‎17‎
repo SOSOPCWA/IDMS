@@ -256,7 +256,7 @@ public partial class Config_Pointer : System.Web.UI.Page
         string UserID = Session["UserID"].ToString().ToLower();
         string UnitName = Session["UnitName"].ToString();   //登入的UnitName
 
-        if (UserID != "operator" & UnitName == "電腦操作課") return (true);
+        if (UserID != "operator" & UnitName == "作業管控科") return (true);
         else return (false);
     }
     

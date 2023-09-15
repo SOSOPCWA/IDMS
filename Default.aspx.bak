@@ -16,7 +16,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp; b. 部分於連結中斷期間以手動方式新增之資產編號，與目前ISMS資產清冊衝突(編號重複但內容不一致)之調整情形請參閱 <a href="http://10.6.1.11/IDMS/Help/資產編號異動清單_20220715.pdf" target="_blank">資產編號異動清單_20220715.pdf</a> 。<br />																				
 &nbsp;&nbsp;&nbsp;&nbsp; c. 對於設定已註銷資產編號之實體設備，系統將自動於每週一上午 07:50 Mail發送提醒訊息(詳見 生命履歷 -> 資料查核 -> 無資產編號)，請相關負責人員留意。<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 已於111年8月底恢復維護人員例行通知，若您有資料批次修改需求(如 設備編號 -> 資產編號、原資產編號 -> 新資產編號 等)，請於112年2月前與本組聯繫討論。相關人員通知將於後續擇日啟用。<br>
-若有任何問題，請與IDMS負責人(資訊中心操作課 SSM小組)聯繫反映，或請機房OP代為轉達，感謝您的配合與協助。<br />
+若有任何問題，請與IDMS負責人(數值資訊組管理科 SSM小組)聯繫反映，或請機房OP代為轉達，感謝您的配合與協助。<br />
 <br />
 <br />
 2. http://10.6.1.4:8888資料庫已轉移至 http://10.6.1.11:8888 <br />
@@ -46,9 +46,9 @@ http://10.6.1.4:8888已下線，兩者資料不互通。<br />
 <br />
 【權責分工】：<br />
 &nbsp;&nbsp;&nbsp; 1.【設備管理】由硬體負責人負責<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a.系統設備、零附件、週邊設備多半由系統課負責，以實際維護人員為準<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b.網路設備由網路課網管小組負責<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c.環境設備由操作課環境小組負責<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a.系統設備、零附件、週邊設備多半由系統科負責，以實際維護人員為準<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b.網路設備由網路科網管小組負責<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c.環境設備由管理科環境小組負責<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; d.辦公設備由保管人員負責<br />
 <br />
 &nbsp;&nbsp;&nbsp; 2.【作業管理】由資訊系統負責人負責<br />
@@ -57,8 +57,8 @@ http://10.6.1.4:8888已下線，兩者資料不互通。<br />
 <br />
 &nbsp;&nbsp;&nbsp; 4.【秘總財產】由保管人員/技術支援課負責<br />
 <br />
-&nbsp;&nbsp;&nbsp; 5.【機房專區】由操作課環境小組負責<br />
+&nbsp;&nbsp;&nbsp; 5.【機房專區】由管理科環境小組負責<br />
 <br />
-&nbsp;&nbsp;&nbsp; 6.【系統設定】程式、設定與文件由操作課SSM小組負責<br />
+&nbsp;&nbsp;&nbsp; 6.【系統設定】程式、設定與文件由管理科SSM小組負責<br />
 
 </asp:Content>

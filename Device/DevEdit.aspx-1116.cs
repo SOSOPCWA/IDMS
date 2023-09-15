@@ -64,7 +64,7 @@ public partial class Device_DevEdit : System.Web.UI.Page
 						UserName = dr[1].ToString(); 
                         UnitName = dr[0].ToString(); 
                         dr.Close();
-						cmd.CommandText = "Select Config from Config where Kind='資訊中心' and Item= @ItemName";
+						cmd.CommandText = "Select Config from Config where Kind='數值資訊組' and Item= @ItemName";
 						cmd.Parameters.Add("@ItemName", SqlDbType.VarChar).Value = UnitName;
 						dr = cmd.ExecuteReader();
 						if (dr.Read())
@@ -340,12 +340,12 @@ public partial class Device_DevEdit : System.Web.UI.Page
         SqlDataReader dr = null;
         dr = cmd.ExecuteReader();
         string cfg = "";
-        if (dr.Read()) cfg = dr[0].ToString(); //先讀資訊中心各課成員(各課優先)
+        if (dr.Read()) cfg = dr[0].ToString(); //先讀數值資訊組各課成員(各課優先)
         else  //再讀其它中心或維護群組(分組次之)
         {
             cmd.Cancel(); cmd.Dispose(); dr.Close();
-            //cmd = new SqlCommand("SELECT Kind FROM Config WHERE Kind not in (select Item from Config where Kind='資訊中心') and Item='" + Pname + "'", Conn);
-            cmd = new SqlCommand("SELECT Kind FROM Config WHERE Kind not in (select Item from Config where Kind='資訊中心') and Item= @Pname ", Conn);
+            //cmd = new SqlCommand("SELECT Kind FROM Config WHERE Kind not in (select Item from Config where Kind='數值資訊組') and Item='" + Pname + "'", Conn);
+            cmd = new SqlCommand("SELECT Kind FROM Config WHERE Kind not in (select Item from Config where Kind='數值資訊組') and Item= @Pname ", Conn);
             cmd.Parameters.AddWithValue("@Pname", Pname);
             
             dr = cmd.ExecuteReader();
@@ -1346,11 +1346,11 @@ public partial class Device_DevEdit : System.Web.UI.Page
         string Dno = TextDevNo.Text; if (Dno == "") Dno = "0";
         string Older = GetValueWithDevNo("IDMS", "select [維護人員] from [實體設備] where [設備編號]= @DevNo" , Dno);//Revise
         //Test.Text += "IN";
-        //if (UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統控制課" && GetDuty(Hw) == UnitName || UnitName == "電腦操作課" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
+        //if (UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統管控科" && GetDuty(Hw) == UnitName || UnitName == "作業管控科" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
         
 
 
-        if (UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統控制課" || UnitName == "電腦操作課" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
+        if (UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統管控科" || UnitName == "作業管控科" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
         {            
             if(SelDevKind.SelectedValue != "虛擬主機" || InGroup(UserName,"SSM小組")) return (true);   //課內只有SSM小組可修改虛擬主機，課外8888則可
             else return (false); 
@@ -1369,16 +1369,16 @@ public partial class Device_DevEdit : System.Web.UI.Page
         string Dno = TextDevNo.Text; if (Dno == "") Dno = "0";
         string Older = GetValueWithDevNo("IDMS", "select [維護人員] from [實體設備] where [設備編號]= @DevNo" , Dno);//Revise
         //Test.Text += "IN";
-        //if (UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統控制課" && GetDuty(Hw) == UnitName || UnitName == "電腦操作課" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
+        //if (UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統管控科" && GetDuty(Hw) == UnitName || UnitName == "作業管控科" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
         
 
 
-        if ( UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統控制課" || UnitName == "電腦操作課" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
+        if ( UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統管控科" || UnitName == "作業管控科" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
         {
             if(SelDevKind.SelectedValue == "個人電腦"){
-                if(InGroup(UserName, "個人電腦小組") || UnitName == "系統控制課" || UnitName == "電腦操作課")return true;
+                if(InGroup(UserName, "個人電腦小組") || UnitName == "系統管控科" || UnitName == "作業管控科")return true;
                 else {
-                    answer += "「非個人電腦小組成員，無權限編輯個人電腦，請聯繫個人電腦小組或系統課。」";
+                    answer += "「非個人電腦小組成員，無權限編輯個人電腦，請聯繫個人電腦小組或系統科。」";
              
                     return false;
                 }
@@ -1499,9 +1499,9 @@ public partial class Device_DevEdit : System.Web.UI.Page
     {
         SqlConnection Conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["IDMSConnectionString"].ConnectionString);
         Conn.Open();
-        string SQL = "(select Kind from Config where Item= @Item and Kind in (select Item from Config where Kind='資訊中心'))"
-            + " UNION (select Config from Config where Item= @Item and kind in (select Item from Config where Kind='維護群組') and Kind<>'資訊中心')"
-            + " UNION (select Item from Config where Item= @Item and Kind='資訊中心')";//Revise
+        string SQL = "(select Kind from Config where Item= @Item and Kind in (select Item from Config where Kind='數值資訊組'))"
+            + " UNION (select Config from Config where Item= @Item and kind in (select Item from Config where Kind='維護群組') and Kind<>'數值資訊組')"
+            + " UNION (select Item from Config where Item= @Item and Kind='數值資訊組')";//Revise
         SqlCommand cmd = new SqlCommand(SQL, Conn);
 		cmd.Parameters.Add("@Item", SqlDbType.VarChar).Value = Maintainor;//Revise
         SqlDataReader dr = null;

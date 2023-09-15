@@ -28,7 +28,7 @@
                     <asp:ListItem>安內外</asp:ListItem>
                     <asp:ListItem>緊急程度</asp:ListItem>
                     <asp:ListItem>作業狀態</asp:ListItem>
-                    <asp:ListItem>維護課別</asp:ListItem>
+                    <asp:ListItem>維護科別</asp:ListItem>
                     <asp:ListItem>維護人員</asp:ListItem>
                     <asp:ListItem>建立人員</asp:ListItem>
                     <asp:ListItem>修改人員</asp:ListItem>
@@ -40,7 +40,7 @@
                     <asp:ListItem>安內外</asp:ListItem>
                     <asp:ListItem>緊急程度</asp:ListItem>
                     <asp:ListItem>作業狀態</asp:ListItem>
-                    <asp:ListItem>維護課別</asp:ListItem>
+                    <asp:ListItem>維護科別</asp:ListItem>
                     <asp:ListItem>維護人員</asp:ListItem>
                     <asp:ListItem>建立人員</asp:ListItem>
                     <asp:ListItem>修改人員</asp:ListItem>

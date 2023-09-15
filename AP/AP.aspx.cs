@@ -64,7 +64,7 @@ public partial class AP_AP : System.Web.UI.Page
             //        else SQL = "select distinct [維護人員]" + DefSQL + " where [維護人員] in (select [成員] from [View_組織架構] where [性質]='群組') order by [維護人員]";
             //        break;
             //    }
-            case "維護課別":
+            case "維護科別":
                 {
                     SQL = "select distinct [課別] from [View_組織架構] where [成員] in (select distinct [維護人員]" + DefSQL + ") order by [課別]";
                     break;

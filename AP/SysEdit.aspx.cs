@@ -313,10 +313,10 @@ public partial class AP_SysEdit : System.Web.UI.Page
 
     protected string GetMtUnit(string Mt) //讀取維護人員單位或分組名稱
     {
-        //先讀資訊中心各課成員(各課優先)
-        string MtUnit=GetValue("IDMS","SELECT [Kind] FROM [Config] WHERE [Kind] in (select [Item] from [Config] where [Kind]='資訊中心') and [Item]='" + Mt + "'");
+        //先讀數值資訊組各課成員(各課優先)
+        string MtUnit=GetValue("IDMS","SELECT [Kind] FROM [Config] WHERE [Kind] in (select [Item] from [Config] where [Kind]='數值資訊組') and [Item]='" + Mt + "'");
         //再讀其它中心或維護群組(分組次之)
-        if (MtUnit=="") MtUnit = GetValue("IDMS","SELECT [Kind] FROM [Config] WHERE [Kind] not in (select [Item] from [Config] where [Kind]='資訊中心') and [Item]='" + Mt + "'");
+        if (MtUnit=="") MtUnit = GetValue("IDMS","SELECT [Kind] FROM [Config] WHERE [Kind] not in (select [Item] from [Config] where [Kind]='數值資訊組') and [Item]='" + Mt + "'");
 
         return (MtUnit);
     }
@@ -381,7 +381,7 @@ public partial class AP_SysEdit : System.Web.UI.Page
         string Mt = SelMt.SelectedValue;  //維護人員 
         string OldMt = GetValue("IDMS", "select [維護人員] from [系統資源] where [資源編號]=" + TextSysNo.Text);    //原負責人
 
-        if (UserID != "operator" & (InGroup(UserName, Mt) | InGroup(UserName, OldMt) | UnitName == "系統控制課" | UnitName == "電腦操作課")) return (true);
+        if (UserID != "operator" & (InGroup(UserName, Mt) | InGroup(UserName, OldMt) | UnitName == "系統管控科" | UnitName == "作業管控科")) return (true);
         else return (false);
     }
 

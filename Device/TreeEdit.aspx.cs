@@ -439,6 +439,7 @@ public partial class Device_TreeEdit : System.Web.UI.Page
         if (TF)
         {
             string SQL = "delete from [" + tbl + "] where [下游編號]=@dno and [上游編號]=@uno";
+            
             Trace.Write(SQL);
             List<SqlParameter> pars = new List<SqlParameter>();
             pars.Add(new SqlParameter("@dno", DnNo));
@@ -663,7 +664,7 @@ public partial class Device_TreeEdit : System.Web.UI.Page
         string Dno = TextDevNo.Text; if (Dno == "") Dno = "0";
         string Older = GetValue("select [維護人員] from [實體設備] where [設備編號]=@dno", "@dno" , Dno);
 
-        if (UserID != "operator" & (InGroup(UserName, Hw) | InGroup(UserName, Older) | UnitName == "系統控制課" | UnitName == "電腦操作課" | InGroup(UserName, "網管小組"))) return (true);
+        if (UserID != "operator" & (InGroup(UserName, Hw) | InGroup(UserName, Older) | UnitName == "系統管控科" | UnitName == "作業管控科" | InGroup(UserName, "網管小組"))) return (true);
         else return (false);
     }
     protected Boolean NetCheck(string Dno) //是否有權修改接網迴路

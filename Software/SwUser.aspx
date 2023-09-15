@@ -35,7 +35,7 @@
             DataSourceID="SqlDataSourceUnitLcs" DataTextField="成員" DataValueField="成員">
         </asp:DropDownList>
         <asp:SqlDataSource ID="SqlDataSourceUnitLcs" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
-            SelectCommand="Select [成員] from [View_組織架構] where [性質]='課別'and [單位]='資訊中心' order by [代號]"></asp:SqlDataSource> &nbsp;&nbsp;
+            SelectCommand="Select [成員] from [View_組織架構] where [性質]='課別'and [單位]='數值資訊組' order by [代號]"></asp:SqlDataSource> &nbsp;&nbsp;
 
         <asp:CheckBox ID="ChkUserLcs" runat="server" />授權人員
         <asp:DropDownList ID="SelUserLcs" runat="server" ForeColor="#009933" Visible="true" DataSourceID="SqlDataSourceUserLcs" DataTextField="Item" DataValueField="Item">
