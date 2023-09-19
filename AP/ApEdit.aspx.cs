@@ -572,7 +572,7 @@ public partial class Device_ApEdit : System.Web.UI.Page
         string Hw = GetValue("IDMS", "select [維護人員] from [實體設備] where [設備編號]=" + Dno); //設備維護人員
         string Older = GetValue("IDMS", "select [維護人員] from [作業主機] where [作業編號]=" + Dno);
 
-        if (UserID != "operator" & (InGroup(UserName, Sw) | InGroup(UserName, Older) | InGroup(UserName, Hw) | UnitName == "系統管控科" | UnitName == "作業管控科" | InGroup(UserName, "軟體小組") | InGroup(UserName, "網管小組"))) return (true);
+        if (UserID != "operator" & (InGroup(UserName, Sw) | InGroup(UserName, Older) | InGroup(UserName, Hw) | UnitName == "系統管控科" | UnitName == "作業管理科" | InGroup(UserName, "軟體小組") | InGroup(UserName, "網管小組"))) return (true);
         else return (false);
     }
 

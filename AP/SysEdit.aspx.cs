@@ -381,7 +381,7 @@ public partial class AP_SysEdit : System.Web.UI.Page
         string Mt = SelMt.SelectedValue;  //維護人員 
         string OldMt = GetValue("IDMS", "select [維護人員] from [系統資源] where [資源編號]=" + TextSysNo.Text);    //原負責人
 
-        if (UserID != "operator" & (InGroup(UserName, Mt) | InGroup(UserName, OldMt) | UnitName == "系統管控科" | UnitName == "作業管控科")) return (true);
+        if (UserID != "operator" & (InGroup(UserName, Mt) | InGroup(UserName, OldMt) | UnitName == "系統管控科" | UnitName == "作業管理科")) return (true);
         else return (false);
     }
 

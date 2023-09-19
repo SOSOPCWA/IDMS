@@ -312,7 +312,7 @@ public partial class GroupEdit : System.Web.UI.Page
         {            
             Trace.Write(se.ToString());        
             Literal Msg = new Literal();
-            Msg.Text = String.Format("<script>alert('{0}');</script>", "您不具有權限異動群組!\\n若有使用需求請聯絡作業管控科");
+            Msg.Text = String.Format("<script>alert('{0}');</script>", "您不具有權限異動群組!\\n若有使用需求請聯絡作業管理科");
             Page.Controls.Add(Msg);
         }        
         catch (System.Exception se)
@@ -360,7 +360,7 @@ public partial class GroupEdit : System.Web.UI.Page
         {            
             Trace.Write(se.ToString());        
             Literal Msg = new Literal();
-            Msg.Text = String.Format("<script>alert('{0}');</script>", "您不具有權限異動群組!\\n若有使用需求請聯絡作業管控科");
+            Msg.Text = String.Format("<script>alert('{0}');</script>", "您不具有權限異動群組!\\n若有使用需求請聯絡作業管理科");
             Page.Controls.Add(Msg);
         }
         catch (System.Exception)
@@ -402,7 +402,7 @@ public partial class GroupEdit : System.Web.UI.Page
         {            
             Trace.Write(se.ToString());        
             Literal Msg = new Literal();
-            Msg.Text = String.Format("<script>alert('{0}');</script>", "您不具有權限異動群組!\\n若有使用需求請聯絡作業管控科");
+            Msg.Text = String.Format("<script>alert('{0}');</script>", "您不具有權限異動群組!\\n若有使用需求請聯絡作業管理科");
             Page.Controls.Add(Msg);
         }
         
@@ -448,7 +448,7 @@ public partial class GroupEdit : System.Web.UI.Page
         {            
             Trace.Write(se.ToString());        
             Literal Msg = new Literal();
-            Msg.Text = String.Format("<script>alert('{0}');</script>", "您不具有權限異動群組!\\n若有使用需求請聯絡作業管控科");
+            Msg.Text = String.Format("<script>alert('{0}');</script>", "您不具有權限異動群組!\\n若有使用需求請聯絡作業管理科");
             Page.Controls.Add(Msg);
         }
         catch (System.Exception se)
@@ -486,7 +486,7 @@ public partial class GroupEdit : System.Web.UI.Page
         {            
             Trace.Write(se.ToString());        
             Literal Msg = new Literal();
-            Msg.Text = String.Format("<script>alert('{0}');</script>", "您不具有權限異動群組!\\n若有使用需求請聯絡作業管控科");
+            Msg.Text = String.Format("<script>alert('{0}');</script>", "您不具有權限異動群組!\\n若有使用需求請聯絡作業管理科");
             Page.Controls.Add(Msg);
         }
         
@@ -579,7 +579,7 @@ public partial class GroupEdit : System.Web.UI.Page
         using (SqlConnection Conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["IDMSConnectionString"].ConnectionString))
         {
             SqlCommand cmd =
-                new SqlCommand(@"SELECT * FROM [config] WHERE Kind='作業管控科' AND Item = @uname", Conn);
+                new SqlCommand(@"SELECT * FROM [config] WHERE Kind='作業管理科' AND Item = @uname", Conn);
             Conn.Open();
             cmd.Parameters.AddWithValue("@uname", username);
             SqlDataReader dr = cmd.ExecuteReader();

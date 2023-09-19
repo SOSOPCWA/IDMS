@@ -181,7 +181,7 @@
                     DataSourceID="SqlDataSourceEvner" DataTextField="Item" DataValueField="Item">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSourceEvner" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>"
-                    SelectCommand="Select Item from Config where Kind='作業管控科' order by Mark"></asp:SqlDataSource>
+                    SelectCommand="Select Item from Config where Kind='作業管理科' order by Mark"></asp:SqlDataSource>
             </td>
 
             <td>

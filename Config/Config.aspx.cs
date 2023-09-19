@@ -126,7 +126,7 @@ public partial class Config_Config : System.Web.UI.Page
             }
             else
             {
-                string SQL = "insert into Config values('" + SelKind.SelectedValue + "','" + TextItem.Text + "','" + TextConfig.Text + "','" + TextMark.Text + "','" + TextMemo.Text.Replace("'", "''") + "')";
+                string SQL = "insert into Config values('" + SelKind.SelectedValue + "',N'" + TextItem.Text + "','" + TextConfig.Text + "','" + TextMark.Text + "','" + TextMemo.Text.Replace("'", "''") + "')";
                 string oldMt = ""; if (GetValue("IDMS", "select * from [Config] where [Item]='" + SelKind.SelectedValue + "' and [Kind] in (select [Item] from [Config] where [Kind] in ('組織架構','維護群組'))") != "") oldMt = SelKind.SelectedValue;
 
                 SqlConnection Conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["IDMSConnectionString"].ConnectionString);
@@ -163,7 +163,7 @@ public partial class Config_Config : System.Web.UI.Page
                 {
                     string oldMt = ""; if (GetValue("IDMS", "select * from [Config] where [Item]='" + SelKind.SelectedValue + "' and [Kind] in (select [Item] from [Config] where [Kind] in ('組織架構','維護群組'))") != "") oldMt = SelKind.SelectedValue;
                     InsLifeLog("修改 [" + SelKind.SelectedValue + "." + ListBox1.SelectedValue + "]  ：： " + GetUpdate("Life"),oldMt);
-                    ExecDbSQL("Update [Config] set " + UpdateSQL + " where Kind='" + SelKind.SelectedValue + "' and Item='" + ListBox1.SelectedValue + "'");
+                    ExecDbSQL("Update [Config] set " + UpdateSQL + " where Kind=N'" + SelKind.SelectedValue + "' and Item=N'" + ListBox1.SelectedValue + "'");
                     Msg.Text = "<script>alert('更新資料 [" + SelKind.SelectedValue + "." + ListBox1.SelectedValue + "] 完成！');</script>";
                 }
                 else Msg.Text = "<script>alert('您未改變任何資料！');</script>";
@@ -317,7 +317,7 @@ public partial class Config_Config : System.Web.UI.Page
         if (dr.Read()) ChkUnit=dr[0].ToString();
         cmd.Cancel(); cmd.Dispose(); dr.Close(); Conn.Close(); Conn.Dispose();
 
-        if (UserID != "operator" & (UnitName == "作業管控科" | UnitName == "系統管控科" | UnitName == "技術支援課" | ChkUnit == "數值資訊組" | InGroup(UserName, ChkUnit))) return (true);
+        if (UserID != "operator" & (UnitName == "作業管理科" | UnitName == "系統管控科" | UnitName == "技術支援課" | ChkUnit == "數值資訊組" | InGroup(UserName, ChkUnit))) return (true);
         else return (false);
     }
 	

@@ -295,7 +295,7 @@ public partial class AP_SysTree : System.Web.UI.Page
         string Mt = GetValue("IDMS", "select [維護人員] from [系統資源] where [資源編號]=" + TextSysNo.Text);  //維護人員 
         string OldMt = Mt;    //原負責人
 
-        if (UserID != "operator" & (InGroup(UserName, Mt) | InGroup(UserName, OldMt) | UnitName == "作業管控科" | UnitName == "系統管控科")) return (true);
+        if (UserID != "operator" & (InGroup(UserName, Mt) | InGroup(UserName, OldMt) | UnitName == "作業管理科" | UnitName == "系統管控科")) return (true);
         else return (false);
     }
 

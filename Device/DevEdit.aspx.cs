@@ -1348,12 +1348,12 @@ public partial class Device_DevEdit : System.Web.UI.Page
         string Dno = TextDevNo.Text; if (Dno == "") Dno = "0";
         string Older = GetValueWithDevNo("IDMS", "select [維護人員] from [實體設備] where [設備編號]= @DevNo" , Dno);//Revise
         //Test.Text += "IN";
-        //if (UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統管控科" && GetDuty(Hw) == UnitName || UnitName == "作業管控科" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
+        //if (UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統管控科" && GetDuty(Hw) == UnitName || UnitName == "作業管理科" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
         
 
 
-        if (UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統管控科" || UnitName == "作業管控科" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
-        {            
+        if (UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統管控科" || UnitName == "作業管理科" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
+        {
             if(SelDevKind.SelectedValue != "虛擬主機" || InGroup(UserName,"SSM小組")) return (true);   //課內只有SSM小組可修改虛擬主機，課外8888則可
             else return (false); 
         }
@@ -1371,14 +1371,14 @@ public partial class Device_DevEdit : System.Web.UI.Page
         string Dno = TextDevNo.Text; if (Dno == "") Dno = "0";
         string Older = GetValueWithDevNo("IDMS", "select [維護人員] from [實體設備] where [設備編號]= @DevNo" , Dno);//Revise
         //Test.Text += "IN";
-        //if (UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統管控科" && GetDuty(Hw) == UnitName || UnitName == "作業管控科" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
+        //if (UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統管控科" && GetDuty(Hw) == UnitName || UnitName == "作業管理科" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
         
 
 
-        if ( UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統管控科" || UnitName == "作業管控科" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
+        if ( UserID != "operator" && (InGroup(UserName, Hw) || InGroup(UserName, Older) || UnitName == "系統管控科" || UnitName == "作業管理科" || InGroup(UserName, "軟體小組") && SelDevType.SelectedValue != "系統設備"))
         {
             if(SelDevKind.SelectedValue == "個人電腦"){
-                if(InGroup(UserName, "個人電腦小組") || UnitName == "系統管控科" || UnitName == "作業管控科")return true;
+                if(InGroup(UserName, "個人電腦小組") || UnitName == "系統管控科" || UnitName == "作業管理科")return true;
                 else {
                     answer += "「非個人電腦小組成員，無權限編輯個人電腦，請聯繫個人電腦小組或系統科。」";
              

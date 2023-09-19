@@ -166,7 +166,7 @@
     <div style="width: 640px; font-family: 標楷體; font-size: 16px; margin: auto;">機房管理單位填寫</div>
     <table border="1" cellspacing="0" cellpadding="0">
         <tr style="padding: 3px">
-            <td width="16%">管理單位:<br/>作業管控科</td>
+            <td width="16%">管理單位:<br/>作業管理科</td>
             <td width="84%" align="center">審核日期:______年___月___日</td>
         </tr>
 

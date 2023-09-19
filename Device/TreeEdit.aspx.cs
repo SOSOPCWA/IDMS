@@ -664,7 +664,7 @@ public partial class Device_TreeEdit : System.Web.UI.Page
         string Dno = TextDevNo.Text; if (Dno == "") Dno = "0";
         string Older = GetValue("select [維護人員] from [實體設備] where [設備編號]=@dno", "@dno" , Dno);
 
-        if (UserID != "operator" & (InGroup(UserName, Hw) | InGroup(UserName, Older) | UnitName == "系統管控科" | UnitName == "作業管控科" | InGroup(UserName, "網管小組"))) return (true);
+        if (UserID != "operator" & (InGroup(UserName, Hw) | InGroup(UserName, Older) | UnitName == "系統管控科" | UnitName == "作業管理科" | InGroup(UserName, "網管小組"))) return (true);
         else return (false);
     }
     protected Boolean NetCheck(string Dno) //是否有權修改接網迴路
