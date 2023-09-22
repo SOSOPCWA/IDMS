@@ -64,7 +64,7 @@ public partial class Device_DevEdit : System.Web.UI.Page
 						UserName = dr[1].ToString(); 
                         UnitName = dr[0].ToString(); 
                         dr.Close();
-						cmd.CommandText = "Select Config from Config where Kind='數值資訊組' and Item= @ItemName";
+						cmd.CommandText = "Select Config from Config where Kind in ('數值資訊組','署內單位') and Item= @ItemName";
 						cmd.Parameters.Add("@ItemName", SqlDbType.VarChar).Value = UnitName;
 						dr = cmd.ExecuteReader();
 						if (dr.Read())

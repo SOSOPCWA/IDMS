@@ -426,10 +426,14 @@
                             <asp:DropDownList ID="SelHwUnit" runat="server" AutoPostBack="True" ForeColor="#009933" DataSourceID="SqlDataSource5" DataTextField="Item" DataValueField="Item">
                             </asp:DropDownList>
                             &nbsp;&nbsp;
-                            <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>" SelectCommand="SELECT [Item] FROM [Config] WHERE (Kind='組織架構' and Item=@MIC) or ([Kind] = @Kind or Kind=@MIC) ORDER BY [mark]">
+                            <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:IDMSConnectionString %>" SelectCommand="SELECT [Item],mark FROM [Config] 
+                            WHERE (Kind='組織架構' and Item='數值資訊組') or 
+                            Kind='維護群組' or Kind='數值資訊組' or Kind='署內單位'
+                            ORDER BY CASE WHEN mark LIKE '%b%' THEN 9 END, mark asc">
                                 <SelectParameters>
                                     <asp:Parameter DefaultValue="維護群組" Name="Kind" Type="String" />
                                     <asp:Parameter DefaultValue="數值資訊組" Name="MIC" Type="String" />
+									<asp:Parameter DefaultValue="署內單位" Name="CWA" Type="String" />
                                 </SelectParameters>
                             </asp:SqlDataSource>
                             <asp:DropDownList ID="SelMaintainor" runat="server" AutoPostBack="True" ForeColor="#009933" DataSourceID="SqlDataSource6" DataTextField="Item" DataValueField="Item">
