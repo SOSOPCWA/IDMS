@@ -371,12 +371,43 @@
             SelectCommand=""></asp:SqlDataSource>
         <br />
     </p>
+    
     <div class="style7">
         總筆數：<asp:TextBox ID="TextCount" runat="server" BackColor="#CCCCCC" ReadOnly="True" Width="60px" CssClass="style7" Font-Bold="True"></asp:TextBox>&nbsp;&nbsp; 
-        總價：<asp:TextBox ID="TextTotal" runat="server" BackColor="#CCCCCC" ReadOnly="True" Width="120px" CssClass="style7" Font-Bold="True"></asp:TextBox>&nbsp;&nbsp; 
-        總額定電流：<asp:TextBox ID="TextSumCurrent" runat="server" BackColor="#CCCCCC" ReadOnly="True" Width="60px" CssClass="style7" Font-Bold="True">0</asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;        		
+       		
 		<asp:Button ID="BtnHtml" runat="server" Text="匯出html檔" OnClick="BtnHtml_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
 		<asp:Button ID="BtnExcel" runat="server" Text="匯出csv檔" OnClick="BtnExcel_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Button ID="BtnMap" runat="server" OnClick="BtnMap_Click" Text="設備分佈圖" />
     </div>
+	
+<script  type="text/javascript">
+function openEditDev(e){
+	// 找到表格欄位後面2格位置的設備編號
+	var k = e.parentElement.nextSibling.nextSibling.innerHTML;
+	// 以防萬一先做正規檢查後，再開啟
+	if(/-?\d{1,6}/.test(k)===true)
+		window.open("/IDMS/Device/DevEdit.aspx?DevNo="+ k);
+}
+function openEditAp(e){
+	// 找到表格欄位後面2格位置的設備編號
+	var k = e.parentElement.nextSibling.nextSibling.innerHTML;
+	// 以防萬一先做正規檢查後，再開啟
+	if(/-?\d{1,6}/.test(k)===true)
+		window.open("/IDMS/AP/ApEdit.aspx?ApNo="+ k);
+}
+(function(){
+	if(! window.location.href.match(/SelMode/)){
+		// 覆寫原編輯鍵功能
+		let element= document.getElementsByTagName('input');
+		for(var i=0;i<element.length;i++){
+			if(element[i].getAttribute("type")=="button"){
+				if(element[i].getAttribute("value")=="設備")
+					element[i].setAttribute("onClick","openEditDev(this)");
+				if(element[i].getAttribute("value")=="作業")
+					element[i].setAttribute("onClick","openEditAp(this)");
+			}
+		}
+	}
+})();
+</script>
 </asp:Content>
