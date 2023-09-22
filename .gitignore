@@ -7,6 +7,9 @@
 images/
 Job/*
 
+Default.aspx
+Default.aspx.cs
+
 <<<<<<< HEAD
 !image/.gitkeep	
 =======
