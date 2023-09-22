@@ -446,7 +446,7 @@ public partial class Device_TreeEdit : System.Web.UI.Page
             pars.Add(new SqlParameter("@uno", UpNo));
             
             ExecDbSQL(SQL, pars);
-            InsLifeLog("刪除 [" + HttpUtility.HtmlEncode(lblDevName.Text) + "] 的" + UpDnC + tbl + "迴路 [" + HttpUtility.HtmlEncode(ListTarget.SelectedItem.Text) + "] ： " + SQL);
+            InsLifeLog("刪除 [" + HttpUtility.HtmlEncode(lblDevName.Text) + "] 的" + UpDnC + tbl + "迴路 [" + HttpUtility.HtmlEncode(ListTarget.SelectedItem.Text) + "] ： " + SQL.Replace("@dno", DnNo).Replace("@uno", UpNo));
             AddMsg("<script>alert('已完成刪除" + UpDnC + tbl + "迴路：" + HttpUtility.HtmlEncode(ListTarget.SelectedItem.Text) + "');</script>");
             ReadConn(TextDevNo.Text, tbl, UpDn, ListTarget);  //讀取設備迴路選單                    
         }

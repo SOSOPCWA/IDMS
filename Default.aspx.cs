@@ -27,7 +27,7 @@ public partial class _Default : System.Web.UI.Page
                 if (dr.Read())
                 {
                     UserName = dr[1].ToString(); UnitName = dr[0].ToString(); dr.Close();
-                    cmd.CommandText = "Select Config from Config where Kind='數值資訊組' and Item='" + UnitName + "'";
+                    cmd.CommandText = "Select Config from Config where (Kind='數值資訊組' and Item='" + UnitName + "') OR (Kind='署內單位' and Item='" + UnitName + "')";
                     dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {

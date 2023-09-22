@@ -20,21 +20,21 @@ public partial class Config_Config : System.Web.UI.Page
 
     protected void Page_PreRenderComplete(object sender, EventArgs e)   //放Page_Load無法顯示
     {
-        lblKind.Text = GetValue("IDMS", "select [Memo] from [Config] where [Kind]='" + Request.QueryString["kind"] + "' and Item='" + SelKind.SelectedValue + "'").Replace("\r\n", "<br />");
+        lblKind.Text = GetValue("IDMS", "select [Memo] from [Config] where [kind]=N'" + Request.QueryString["kind"] + "' and Item='" + SelKind.SelectedValue + "'").Replace("\r\n", "<br />");
     }
 
     protected void SelKind_SelectedIndexChanged(object sender, EventArgs e)
     {
         ListBox1.DataSourceID = "SqlDataSource2";
         ClearData();
-        lblKind.Text = GetValue("IDMS", "select [Memo] from [Config] where [Kind]='" + Request.QueryString["kind"] + "' and Item='" + SelKind.SelectedValue + "'");
+        lblKind.Text = GetValue("IDMS", "select [Memo] from [Config] where [kind]=N'" + Request.QueryString["kind"] + "' and Item='" + SelKind.SelectedValue + "'");
     }
 
     protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
         SqlConnection Conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["IDMSConnectionString"].ConnectionString);
         Conn.Open();
-        SqlCommand cmd = new SqlCommand("select * from Config where Kind='" + SelKind.SelectedValue + "' and Item='" + ListBox1.SelectedValue + "'", Conn);
+        SqlCommand cmd = new SqlCommand("select * from Config where Kind=N'" + SelKind.SelectedValue + "' and Item=N'" + ListBox1.SelectedValue + "'", Conn);
         SqlDataReader dr = null;
         dr = cmd.ExecuteReader();
         if (dr.Read())
@@ -181,7 +181,7 @@ public partial class Config_Config : System.Web.UI.Page
         string SQL = "";
         SqlConnection Conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["IDMSConnectionString"].ConnectionString);
         Conn.Open();
-        SqlCommand cmd = new SqlCommand("select * from [Config] where [Kind]='" + SelKind.SelectedValue + "' and [Item]='" + ListBox1.SelectedValue + "'", Conn);
+        SqlCommand cmd = new SqlCommand("select * from [Config] where [Kind]=N'" + SelKind.SelectedValue + "' and [Item]=N'" + ListBox1.SelectedValue + "'", Conn);
         SqlDataReader dr = null;
         dr = cmd.ExecuteReader();
         if (dr.Read())
@@ -281,7 +281,7 @@ public partial class Config_Config : System.Web.UI.Page
             {
                 string oldMt = ""; if (GetValue("IDMS", "select * from [Config] where [Item]='" + SelKind.SelectedValue + "' and [Kind] in (select [Item] from [Config] where [Kind] in ('組織架構','維護群組'))") != "") oldMt = SelKind.SelectedValue;
                 InsLifeLog("修改 [" + oldClass + "." + TextItem.Text + "]  ：： [Kind]：" + oldClass + " -> " + SelKind.SelectedValue,oldMt);
-                ExecDbSQL("Update [Config] set [Kind]='" + SelKind.SelectedValue + "' where Kind='" + oldClass + "' and Item='" + TextItem.Text + "'");
+                ExecDbSQL("Update [Config] set [kind]=N'" + SelKind.SelectedValue + "' where Kind='" + oldClass + "' and Item='" + TextItem.Text + "'");
                 SelKind_SelectedIndexChanged(null,null);
 
                 Msg.Text = "<script>alert('更新資料 [" + SelKind.SelectedValue + "." + TextItem.Text + "] 完成！');</script>";
