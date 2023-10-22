@@ -1,4 +1,5 @@
-﻿<%@ Page Title="通用查詢" Language="C#" EnableViewState="true" MasterPageFile="~/IDMS/MasterPage.master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeFile="Search.aspx.cs" Trace="false" Debug="true" Inherits="Search_Search" EnableEventValidation="false"%>
+﻿<%-- <%@ Page Title="通用查詢" Language="C#" MasterPageFile="~/IDMS/MasterPage.master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeFile="Search.aspx.cs" Inherits="Search_Search" %> --%>
+<%@ Page Title="通用查詢" Language="C#" MasterPageFile="~/IDMS/MasterPage.master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeFile="Search.aspx.cs" Inherits="Search_Search" EnableEventValidation="false"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">        
@@ -347,10 +348,6 @@
         <asp:Button ID="BtnSearch" runat="server" Text="　查　詢　" OnClick="BtnSearch_Click" />
     </div>
 
-    <p>電源位置: 
-        <asp:Label ID="lblTree" runat="server" CommandName="UPS" Text="" ></asp:Label>
-    </p>
-    
     <p>
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True"
             BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px"
@@ -359,14 +356,6 @@
             <Columns>
                 <asp:ButtonField ButtonType="Button" CommandName="設備" Text="設備" HeaderText="編輯" />
                 <asp:ButtonField ButtonType="Button" CommandName="作業" Text="作業" HeaderText="編輯"  />
-            </Columns>
-            <Columns>
-                <asp:TemplateField HeaderText="UPS">
-                    <ItemTemplate>
-                        
-                        <asp:Button ID="Btn" runat="server"  Text="查詢" OnClick="FindUPS_Click"></asp:Button>
-                    </ItemTemplate>
-                </asp:TemplateField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -382,44 +371,12 @@
             SelectCommand=""></asp:SqlDataSource>
         <br />
     </p>
-
-
     <div class="style7">
         總筆數：<asp:TextBox ID="TextCount" runat="server" BackColor="#CCCCCC" ReadOnly="True" Width="60px" CssClass="style7" Font-Bold="True"></asp:TextBox>&nbsp;&nbsp; 
-       		
+        總價：<asp:TextBox ID="TextTotal" runat="server" BackColor="#CCCCCC" ReadOnly="True" Width="120px" CssClass="style7" Font-Bold="True"></asp:TextBox>&nbsp;&nbsp; 
+        總額定電流：<asp:TextBox ID="TextSumCurrent" runat="server" BackColor="#CCCCCC" ReadOnly="True" Width="60px" CssClass="style7" Font-Bold="True">0</asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;        		
 		<asp:Button ID="BtnHtml" runat="server" Text="匯出html檔" OnClick="BtnHtml_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
 		<asp:Button ID="BtnExcel" runat="server" Text="匯出csv檔" OnClick="BtnExcel_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Button ID="BtnMap" runat="server" OnClick="BtnMap_Click" Text="設備分佈圖" />
     </div>
-	
-<script  type="text/javascript">
-function openEditDev(e){
-	// 找到表格欄位後面2格位置的設備編號
-	var k = e.parentElement.nextSibling.nextSibling.nextSibling.innerHTML;
-	// 以防萬一先做正規檢查後，再開啟
-	if(/-?\d{1,6}/.test(k)===true)
-		window.open("/IDMS/Device/DevEdit.aspx?DevNo="+ k);
-}
-function openEditAp(e){
-	// 找到表格欄位後面2格位置的設備編號
-	var k = e.parentElement.nextSibling.nextSibling.nextSibling.innerHTML;
-	// 以防萬一先做正規檢查後，再開啟
-	if(/-?\d{1,6}/.test(k)===true)
-		window.open("/IDMS/AP/ApEdit.aspx?ApNo="+ k);
-}
-(function(){
-	if(! window.location.href.match(/SelMode/)){
-		// 覆寫原編輯鍵功能
-		let element= document.getElementsByTagName('input');
-		for(var i=0;i<element.length;i++){
-			if(element[i].getAttribute("type")=="button"){
-				if(element[i].getAttribute("value")=="設備")
-					element[i].setAttribute("onClick","openEditDev(this)");
-				if(element[i].getAttribute("value")=="作業")
-					element[i].setAttribute("onClick","openEditAp(this)");
-			}
-		}
-	}
-})();
-</script>
 </asp:Content>

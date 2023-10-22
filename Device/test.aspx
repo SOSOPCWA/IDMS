@@ -47,7 +47,7 @@
     <body bgcolor="LightGray">
         <form id="form1" runat="server">
             <div style="display:flex;justify-content: space-between;">
-
+				<asp:label id="test" runat="server" text="this test"/>
             </div>
 
 

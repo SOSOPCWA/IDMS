@@ -13,11 +13,29 @@ public partial class Device_test : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Get_list();
+		Test_fun();
         if (!IsPostBack)
         {
 
         }
     }
+	
+	protected void Test_fun(){
+			SqlConnection Conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DiaryConnectionString"].ConnectionString);
+        Conn.Open();
+     string sql = "SELECT * FROM diary order by [日誌時間] desc offset 0 rows fetch next 100 rows only";
+       // String sql = "select max([DiaryNo])+1 from [diary] where [tour]='202310161'";
+		SqlCommand cmd = new SqlCommand(sql, Conn);
+
+        SqlDataReader dr = cmd.ExecuteReader();
+		StringBuilder out1 = new StringBuilder("");
+		while(dr.Read()){
+			out1.Append(dr["處理時間"].ToString()+ " * " + dr["日誌編號"].ToString() + " * " + dr["訊息編號"].ToString() + dr["處理過程"].ToString() + "<br/>");
+		//	out1.Append(dr[0].ToString());
+		}
+		
+		test.Text = out1.ToString();
+	}
 
     protected void Get_list()
     {

@@ -15,9 +15,10 @@ public partial class Search_Search : System.Web.UI.Page
 	
     protected void Page_Load(object sender, EventArgs e)
     {
+        Trace.Warn("sql");
         if (!IsPostBack)
         {
-              
+
         }
     }
 
@@ -29,6 +30,7 @@ public partial class Search_Search : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+
             LinkUPS_Click(null, null);
             
             if (Request["Search"] != null)  //外部關鍵字查詢
@@ -607,6 +609,7 @@ public partial class Search_Search : System.Web.UI.Page
         }
     }
 
+    
     protected string FormatChilds(string PkNos)    //格式化下游字串
     {
         string cfg = PkNos.Replace(",0,", ",").Replace(",,", ",");
@@ -640,6 +643,7 @@ public partial class Search_Search : System.Web.UI.Page
 		
         SqlDataReader dr = null;
         dr = cmd.ExecuteReader();
+        
         string cfg = ""; if (dr.Read()) cfg = dr[0].ToString();
         cmd.Cancel(); cmd.Dispose(); dr.Close(); Conn.Close(); Conn.Dispose();
 
@@ -666,34 +670,137 @@ public partial class Search_Search : System.Web.UI.Page
         dbAdapter.Dispose(); Conn.Close(); Conn.Dispose();
         return (QueryDataSet);   
     }
+    protected void FindUPS_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Button btn = sender as Button;
+            if (btn == null)
+                throw new Exception("觸發事件的控件不是按鈕");
 
+            GridViewRow row = btn.NamingContainer as GridViewRow;
+            if (row == null)
+                throw new Exception("無法找到按鈕所在的行");
+
+            
+            const int devNoCellIndex = 3; 
+            const int checkCellIndex = 20; 
+
+            string DevNo = row.Cells[devNoCellIndex].Text; //取得設備編號的值
+
+            if (string.IsNullOrEmpty(DevNo))
+            {
+                lblTree.Text = "設備編號值有誤";
+            }
+            else if (row.Cells[checkCellIndex].Text == "&nbsp;") //確認接電迴路設備有無值
+            {
+                lblTree.Text = "無接電迴路設備";
+            }
+            else
+            {
+                string temp = ReadDevice(DevNo);
+                lblTree.Text = temp.Replace("＊ BRC", "<br/>");
+            }
+        }
+        catch (Exception ex)
+        {
+            lblTree.Text = string.Format("發生錯誤: {0}", ex.Message);
+        }
+    }
+
+//從TreeEdit.aspx.cs拿來的程式
+    protected string GetPath(string DevNo,string tbl, string tail)   //取得迴路路徑
+    {
+        SqlConnection Conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["IDMSConnectionString"].ConnectionString);
+        Conn.Open();
+        SqlCommand cmd = new SqlCommand("select [上游編號],[設備名稱] from [" + tbl + "],[實體設備] where [" + tbl + "].[上游編號]=[實體設備].[設備編號] and [" + tbl + "].[下游編號]=@DN" , Conn);
+        cmd.Parameters.AddWithValue("@DN", DevNo);
+        SqlDataReader dr = null;
+        dr = cmd.ExecuteReader();
+        string path = "", UpPath = "", DnPath = "";
+
+        int i = 0;
+        while (dr.Read())
+        {
+            i++;
+            DnPath = dr["設備名稱"].ToString() + " → " + tail;
+            UpPath = GetPath(dr["上游編號"].ToString(), tbl, DnPath);
+            if (i == 1) path = UpPath + DnPath;
+            else path = path + "＊ BRC" + UpPath + DnPath;
+
+            path = path.Replace(DnPath + DnPath, DnPath);
+        }
+
+        cmd.Cancel(); cmd.Dispose(); dr.Close(); Conn.Close(); Conn.Dispose();        
+        return (path);
+    }
+
+//從TreeEdit.aspx.cs拿來並改寫的程式
+protected string ReadDevice(string DevNo)    //讀取實體設備
+{
+    string lblTree = "";
+    
+    using (SqlConnection Conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["IDMSConnectionString"].ConnectionString))
+    {
+        Conn.Open();
+        using (SqlCommand cmd = new SqlCommand())
+        {
+            cmd.Connection = Conn;
+
+            // 檢查設備編號
+            if (DevNo.Length < 5)
+            { //一般設備
+                cmd.CommandText = "SELECT * FROM [View_設備管理] WHERE [設備編號] = @DevNo";
+                cmd.Parameters.AddWithValue("@DevNo", DevNo);
+            }
+            using (SqlDataReader dr = cmd.ExecuteReader())
+            {
+                if (dr.Read())
+                {
+                    if (DevNo.Length < 5)
+                    {
+                        lblTree = HttpUtility.HtmlEncode(GetPath(dr["設備編號"].ToString(), "接電", ""));
+                    }
+                }
+            }
+        }
+    }
+    return lblTree;
+}
+
+
+//這段已被前端JS取代
     protected void GridView1_RowCommand(object sender, CommandEventArgs e)
     {
-        if (e.CommandName == "設備" | e.CommandName == "作業")
+        if (e.CommandName == "設備" | e.CommandName == "作業" )
         {
             int Idx = int.Parse(e.CommandArgument.ToString());
-            string DevNo = GridView1.DataKeys[Idx].Value.ToString(); if (DevNo == "") DevNo = "0";
-            string ApNo = GridView1.Rows[Idx].Cells[3].Text; //if (ApNo == ""| ApNo == "&nbsp;") ApNo = "0"; 
-            int n; if (!int.TryParse(ApNo, out n)) ApNo = "0";
 
+            string DevNo = GridView1.DataKeys[Idx].Value.ToString(); if (DevNo == "") DevNo = "0";
+            int m; if (!int.TryParse(DevNo, out m)) DevNo = "0";
+            string ApNo = GridView1.Rows[Idx].Cells[3].Text; 
+            int n; if (!int.TryParse(ApNo, out n)) ApNo = "0";
             switch (e.CommandName)
             {
                 case "設備":
                     {
-                        //if (DevNo != "0") OpenExecWindow("window.open('../Device/DevEdit.aspx?DevNo=" + DevNo + "','_blank');");
+                        
 						if (DevNo != "0") OpenExecWindow("window.open('../Device/DevEdit.aspx?DevNo=" + HttpUtility.UrlEncode(DevNo) + "','_blank');");
+                        
                         break;
                     }
                 case "作業":
                     {						
-						//if (ApNo != "0") OpenExecWindow("window.open('../AP/ApEdit.aspx?ApNo=" + ApNo + "','_blank');");
+						
                         if (ApNo != "0") OpenExecWindow("window.open('../AP/ApEdit.aspx?ApNo=" + HttpUtility.UrlEncode(ApNo) + "','_blank');");
                         else AddMsg("<script>alert('顯示欄位第二欄是 [作業編號] 且有值方能開啟作業編輯介面！');</script>");
+                        
                         break;
                     }
             }
         }
     }
+    
 
     protected void OpenExecWindow(string strJavascript)    //選取後就另開視窗
     {
