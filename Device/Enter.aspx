@@ -24,7 +24,7 @@
     <form id="form1" runat="server">
     <br />
     <div align="center" style="margin: auto; width: 640px; font-size: 16px; font-family: 標楷體;font-weight: bold;">
-        氣象數值資訊組<br />硬體設備移入機房申請單
+        中央氣象署<br />硬體設備移入機房申請單
     </div>
 
     <br />
@@ -239,7 +239,7 @@
     </div>
     
     <div style="width: 640px; font-family: 標楷體; font-size: 12px; margin: auto;color:#CCCCCC">
-        表單資訊：CWB-ISMS-MIC-SOS-D002-硬體設備移入機房申請單_1080906_v1.2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 機密等級：限閱
+        表單資訊：CWA-ISMS-CWA-SOS-D002-硬體設備移入機房申請單_20231117_v1.0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 機密等級：限閱
     </div>
 
 
@@ -284,7 +284,7 @@
         <tr>
             <td>
                 <div style="width: 640px; font-family: 標楷體; font-size: 12px; margin: auto;color:#CCCCCC">
-                    表單資訊：CWB-ISMS-MIC-SOS-D002-硬體設備移入機房申請單_20171221_v1.1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 機密等級：限閱
+                    表單資訊：CWA-ISMS-CWA-SOS-D002-硬體設備移入機房申請單_20231117_v1.0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 機密等級：限閱
                 </div>
             </td>
         </tr>
